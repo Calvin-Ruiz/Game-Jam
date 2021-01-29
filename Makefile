@@ -11,7 +11,7 @@ NAME = laby
 
 OBJ = $(SRC:.cpp=.o)
 
-CFLAGS = -Wall -Wextra -Werror -j12
+CFLAGS = -Wall -Wextra -Werror
 CC = g++
 
 .PHONY: all clean fclean re

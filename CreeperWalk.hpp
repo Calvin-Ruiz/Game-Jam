@@ -18,7 +18,7 @@ public:
     CreeperWalk &operator=(const CreeperWalk &src) = default;
 
     virtual void initalize() override;
-    virtual void refresh() override;
+    virtual void update() override;
 private:
 };
 

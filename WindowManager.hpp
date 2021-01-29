@@ -17,8 +17,14 @@ public:
     WindowManager(const WindowManager &cpy) = default;
     WindowManager &operator=(const WindowManager &src) = default;
 
+    //! For heavy initializations
     virtual void initalize() override;
+    //! Draw game
     virtual void refresh() override;
+    //! Manage game events
+    virtual void update() override;
+    //! Manage pause menu
+    virtual void onPause() override;
 private:
 };
 

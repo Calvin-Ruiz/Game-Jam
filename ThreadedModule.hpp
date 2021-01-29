@@ -19,9 +19,19 @@ public:
     ThreadedModule(const ThreadedModule &cpy) = default;
     ThreadedModule &operator=(const ThreadedModule &src) = default;
 
+    //! For heavy initializations
     virtual void initalize() = 0;
-    virtual void refresh() = 0;
-private:
+    //! Called last, but always called
+    virtual void refresh() {}
+    //! Only called while paused
+    virtual void onPause() {}
+    //! Only called while not paused
+    virtual void update() = 0;
+    //! Tell if initialization has completed
+    virtual void isReady() {return ready;}
+protected:
+    //! Set to true once initialization complete
+    bool ready = false;
 };
 
 #endif /* THREADEDMODULE_HPP_ */

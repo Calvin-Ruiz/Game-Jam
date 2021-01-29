@@ -22,7 +22,6 @@ public:
 
     //! must be called while in pause
     void reset(int time, int x, int y);
-    virtual void initialize() override;
     virtual void update() override;
     inline void creeperify(int x, int y);
 private:

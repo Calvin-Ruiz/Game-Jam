@@ -11,3 +11,8 @@ GlobalActivity::GlobalActivity()
 
 GlobalActivity::~GlobalActivity()
 {}
+
+void GlobalActivity::update()
+{
+
+}

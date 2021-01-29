@@ -9,7 +9,8 @@
 #define ROOM_HPP_
 
 struct room {
-    short hasCreeper;
+    bool hasCreeper;
+    bool hasChanged;
     bool left;
     bool right;
     bool top;

@@ -15,10 +15,12 @@ CreeperWalk::~CreeperWalk()
 
 void CreeperWalk::reset(int time, int x, int y)
 {
+    mtx.lock();
     creepers.clear();
     spawnTime = time;
     spawnX = x;
     spawnY = y;
+    mtx.unlock();
 }
 
 inline void CreeperWalk::creeperify(int x, int y)
@@ -44,6 +46,7 @@ inline void CreeperWalk::creeperify(int x, int y)
 
 void CreeperWalk::update()
 {
+    mtx.lock();
     if (spawnTime) {
         spawnTime--;
         return;
@@ -61,4 +64,5 @@ void CreeperWalk::update()
             creeperify(value.x, value.y + 1);
     }
     creepers.swap(newCreepers);
+    mtx.unlock();
 }

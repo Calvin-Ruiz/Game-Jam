@@ -11,6 +11,7 @@
 #include "ThreadedModule.hpp"
 #include "Room.hpp"
 #include <vector>
+#include <mutex>
 
 class CreeperWalk : public ThreadedModule {
 public:
@@ -30,6 +31,7 @@ private:
     std::vector<position> creepers;
     std::vector<position> newCreepers;
     std::vector<std::vector<room>> &rooms;
+    std::mutex mtx;
 };
 
 #endif /* CREEPERWALK_HPP_ */

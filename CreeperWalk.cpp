@@ -5,6 +5,7 @@
 ** CreeperWalk.cpp
 */
 #include "CreeperWalk.hpp"
+#include "Door.hpp"
 
 CreeperWalk::CreeperWalk(std::vector<std::vector<room>> &rooms) : rooms(rooms)
 {}
@@ -25,6 +26,16 @@ inline void CreeperWalk::creeperify(int x, int y)
     room &target = rooms[x][y];
 
     if (!target.hasCreeper) {
+        if (target.isBlocking) {
+            Door *tmp = dynamic_cast<Door *>(target.item);
+            if (tmp) {
+                if (tmp->damage())
+                    // The door is broken !
+                    target.item = nullptr;
+                else // The door resist
+                    return;
+            }
+        }
         target.hasCreeper = true;
         target.hasChanged = true;
         newCreepers.push_back({x, y, &target});

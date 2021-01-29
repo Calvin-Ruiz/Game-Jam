@@ -26,7 +26,7 @@ public:
 
     virtual void draw() = 0;
     virtual void drawInInventory(int index) = 0;
-private:
+protected:
     sf::RenderWindow &window;
 };
 

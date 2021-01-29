@@ -13,6 +13,6 @@ int main(int argc, char const *argv[])
     Core core;
 
     // Build everything here
-    core.mainloop()
+    core.mainloop();
     return 0;
 }

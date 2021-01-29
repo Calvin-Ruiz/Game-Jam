@@ -6,10 +6,11 @@
 */
 #include "Core.hpp"
 #include "ThreadedModule.hpp"
+#include "Room.hpp"
+#include "Item.hpp"
 #include <SFML/System/Clock.hpp>
 #include <chrono>
 #include <string>
-#include "Room.hpp"
 
 Core::Core()
 {
@@ -70,11 +71,11 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
     long next = clock.getElapsedTime().asMicroseconds();
     while (isAlive) {
         next += refreshFrequency;
-        if (isPaused)
-            module->onPause();
-        else
+        if (!isPaused)
             module->update();
         module->refresh();
+        if (isPaused)
+            module->onPause();
         long actual = clock.getElapsedTime().asMicroseconds();
         if (actual < next)
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));

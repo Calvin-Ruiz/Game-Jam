@@ -20,15 +20,15 @@ public:
     ThreadedModule &operator=(const ThreadedModule &src) = default;
 
     //! For heavy initializations
-    virtual void initalize() {ready = true;}
-    //! Called last, but always called
+    virtual void initialize() {ready = true;}
+    //! Called after update and before onPause
     virtual void refresh() {}
     //! Only called while not paused
     virtual void update() = 0;
     //! Only called while paused
     virtual void onPause() {}
     //! Tell if initialization has completed
-    virtual void isReady() {return ready;}
+    virtual bool isReady() {return ready;}
 protected:
     //! Set to true once initialization complete
     //! Set this to false once initialized to close the program

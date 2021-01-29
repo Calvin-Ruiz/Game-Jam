@@ -9,6 +9,7 @@
 #define ROOM_HPP_
 
 #include <memory>
+class Item;
 
 struct room {
     bool hasCreeper;
@@ -19,6 +20,12 @@ struct room {
     bool top;
     bool bottom;
     Item *item;
+};
+
+struct position {
+    int x;
+    int y;
+    room *target;
 };
 
 #endif /* ROOM_HPP_ */

@@ -12,6 +12,11 @@
 #include <string>
 #include <memory>
 
+namespace sf {
+    class RenderWindow;
+    class Texture;
+};
+
 class Item {
 public:
     Item(sf::RenderWindow &window, sf::Texture &texture);

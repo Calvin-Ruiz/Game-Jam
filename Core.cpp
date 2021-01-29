@@ -9,6 +9,7 @@
 #include <SFML/System/Clock.hpp>
 #include <chrono>
 #include <string>
+#include "Room.hpp"
 
 Core::Core()
 {
@@ -60,7 +61,7 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
     bool &isAlive = *pIsAlive;
     bool &isPaused = *pIsAlive;
     refreshFrequency = 1000000/refreshFrequency;
-    module->init();
+    module->initialize();
 
     // Wait other threads
     while (!isAlive && !isPaused) // isPaused is set to true in case of timeout

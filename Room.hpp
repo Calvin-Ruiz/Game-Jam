@@ -8,9 +8,12 @@
 #ifndef ROOM_HPP_
 #define ROOM_HPP_
 
+#include <memory>
+
 struct room {
     bool hasCreeper;
     bool hasChanged;
+    bool isBlocking; // Is it blocking for creeper
     bool left;
     bool right;
     bool top;

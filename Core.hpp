@@ -24,12 +24,11 @@ public:
 
     void mainloop();
     void startMainloop(int refreshFrequency, ThreadedModule *module);
-    void kill() {isAlive = false;}
     void setPause(bool state) {isPaused = state;}
 private:
-    bool isAlive = true;
-    bool isPaused = true;
-    static void threadLoop(bool *isAlive, bool *pIsPaused, int refreshFrequency, IEngine *engine);
+    bool isAlive = false;
+    bool isPaused = false;
+    static void threadLoop(bool *isAlive, bool *pIsPaused, int refreshFrequency, ThreadedModule *engine);
     std::vector<std::thread> threads;
     std::vector<ThreadedModule *> modules;
 };

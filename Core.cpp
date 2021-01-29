@@ -9,45 +9,9 @@
 #include <SFML/System/Clock.hpp>
 #include <chrono>
 #include <string>
-#include "graphicModule/CoreDraw.hpp"
-#include "dataModule/Interface.hpp"
-#include "ttyModule/CoreTTY.hpp"
 
-Core::Core(int argc, char const *argv[])
+Core::Core()
 {
-    int width = 800;
-    int height = 600;
-    bool fullscreen = false;
-    bool tty = false;
-    int frequency = 5;
-    std::string name = "MyGKrellm";
-
-    argc--;
-    argv++;
-    while (argc-- > 0) {
-        std::string arg = argv++[0];
-        if (arg == "--fullscreen") {
-            fullscreen = true;
-        } else if (argc > 1 && arg == "--size") {
-            width = std::stoi(argv++[0]);
-            height = std::stoi(argv++[0]);
-            argc -= 2;
-        } else if (arg == "--tty") {
-            tty = true;
-        } else if (argc > 0 && arg == "--frequency") {
-            frequency = std::stoi(argv++[0]);
-            argc--;
-        } else if (argc > 0 && arg == "--name") {
-            name = argv++[0];
-            argc--;
-        }
-    }
-    startMainloop(frequency + 1, new Interface()); // Increase update frequency to ensure always display new content
-    if (tty) {
-        startMainloop(frequency, new CoreTTY());
-    } else {
-        startMainloop(frequency, new CoreDraw(fullscreen, name, width, height));
-    }
 }
 
 Core::~Core()
@@ -67,46 +31,52 @@ void Core::mainloop()
     while (!aliveProcess && timeout--) {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         aliveProcess = true;
-        for (auto &engine : engines) {
-            aliveProcess &= engine->isReady();
+        for (auto &module : modules) {
+            aliveProcess &= module->isReady();
         }
     }
-    if (timeout == 600) {
+    if (timeout == -1) {
+        isPaused = true;
         std::cerr << "Timeout : Modules has taken too many time to start.\n";
         return;
     }
     bool isAlive = true;
     while (isAlive && aliveProcess) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        for (auto &engine : engines) {
-            aliveProcess &= engine->isReady();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        for (auto &module : modules) {
+            aliveProcess &= module->isReady();
         }
     }
 }
 
-void Core::startMainloop(int refreshFrequency, IEngine *engine)
+void Core::startMainloop(int refreshFrequency, ThreadedModule *module)
 {
-    engines.push_back(engine);
-    threads.emplace_back(threadLoop, &isAlive, &isPaused, refreshFrequency, std::move(engine));
+    modules.push_back(module);
+    threads.emplace_back(threadLoop, &isAlive, &isPaused, refreshFrequency, std::move(module));
 }
 
-void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, ThreadedModule *engine)
+void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, ThreadedModule *module)
 {
     bool &isAlive = *pIsAlive;
     bool &isPaused = *pIsAlive;
     refreshFrequency = 1000000/refreshFrequency;
-    engine->init();
+    module->init();
 
+    // Wait other threads
+    while (!isAlive && !isPaused) // isPaused is set to true in case of timeout
+        std::this_thread::sleep_for(std::chrono::milliseconds(10)); // 100 check per second
     sf::Clock clock;
     long next = clock.getElapsedTime().asMicroseconds();
     while (isAlive) {
         next += refreshFrequency;
         if (isPaused)
-            engine->onPause()
-        engine->refresh();
+            module->onPause();
+        else
+            module->update();
+        module->refresh();
         long actual = clock.getElapsedTime().asMicroseconds();
         if (actual < next)
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));
     }
-    delete engine;
+    delete module;
 }

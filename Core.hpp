@@ -44,6 +44,8 @@ public:
     std::shared_ptr<DynamicItem> getDynamicItem();
     static Core *core;
     bool isCompleted = false;
+    //! For GlobalActivity
+    std::vector<std::shared_ptr<DynamicItem>> &getDynamicItemList() {return animatedItems;}
 private:
     bool isAlive = false;
     bool isPaused = false;

@@ -32,10 +32,13 @@ int main(/*int argc, char const *argv[]*/)
         if (!window.isOpen())
             break;
         Core core;
+        int x = 5, y = 5; // must be replaced by the entry location
         createLaby(core.getSeed(), width, height, core.rooms, core.getItemList());
 
         // Build everything here
-        core.startMainloop(5, new CreeperWalk(core.rooms));
+        auto creep = new CreeperWalk(core.rooms);
+        creep->reset(150, 25, x, y); // 30 seconds before creeper comes, then 5 seconds per step
+        core.startMainloop(5, creep);
         core.startMainloop(20, new GlobalActivity());
         //core.startMainloop(60, new WindowManager(window));
         core.mainloop();

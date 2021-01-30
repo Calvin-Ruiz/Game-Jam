@@ -12,7 +12,7 @@ NAME = laby
 
 OBJ = $(SRC:.cpp=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra
 CC = g++
 BINFLAGS = -lpthread -lsfml-system -lsfml-window -lsfml-graphics
 

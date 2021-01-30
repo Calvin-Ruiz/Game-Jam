@@ -15,6 +15,7 @@ Player *Player::instance = nullptr;
 Player::Player(GraphicPlayer *gPlayer) : gPlayer(gPlayer)
 {
     instance = this;
+    health = maxHealth;
 }
 
 Player::~Player()
@@ -84,7 +85,22 @@ void Player::useItem(int idx)
 
 bool Player::update()
 {
-    if (pos && pos->hasCreeper)
-        health--;
+    if (pos && pos->hasCreeper) {
+        gPlayer->setHealth((float) --health / (float) maxHealth);
+    }
     return (health > 0);
+}
+
+void Player::draw()
+{
+    for (auto item : inventory) {
+        if (item)
+            item->drawInInventory();
+    }
+}
+
+void Player::recover()
+{
+    health = maxHealth;
+    gPlayer->setHealth(1);
 }

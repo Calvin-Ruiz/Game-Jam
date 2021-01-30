@@ -14,6 +14,7 @@ SRC = Blaster.cpp \
 	  TheExit.cpp \
       ThreadedModule.cpp \
 	  WindowManager.cpp \
+	  MediKit.cpp \
 
 NAME = laby
 

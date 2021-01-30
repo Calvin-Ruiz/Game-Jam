@@ -28,18 +28,22 @@ public:
     void useItem(int idx);
     // Damage player if walking on creeper, return true if alive, false is dead
     bool update();
+    // Draw items in inventory
+    void draw();
     // movements
     void left();
     void right();
     void top();
     void bottom();
     GraphicPlayer::orientation getOrientation() {return dir;}
+    void recover();
     static Player *instance;
 private:
     GraphicPlayer::orientation dir = GraphicPlayer::TOP;
     room *pos = nullptr;
     std::unique_ptr<GraphicPlayer> gPlayer;
     std::array<Item *, 10> inventory;
+    const int maxHealth = 100;
     int x, y, health;
 };
 

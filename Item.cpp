@@ -9,6 +9,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Core.hpp"
+#include "Room.hpp"
 
 Item::Item(sf::RenderWindow &window, sf::Texture &texture) : window(window), sprite(texture)
 {}
@@ -35,7 +36,7 @@ void Item::drawInInventory()
 
 bool Item::use(int x, int y)
 {
-    Item *&target = Core::core->rooms[x][y].target;
+    Item *&target = Core::core->rooms[x][y].item;
     if (target)
         return false;
     target = this;

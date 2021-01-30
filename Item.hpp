@@ -11,11 +11,11 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace sf {
     class RenderWindow;
     class Texture;
-    class Sprite;
 };
 
 class Item {

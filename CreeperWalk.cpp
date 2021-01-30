@@ -49,10 +49,10 @@ inline void CreeperWalk::actualizeCreeper(int x, int y)
     room &target = rooms[x][y];
 
     if (target.hasCreeper) {
-        if ((target.target->left && !rooms[x - 1][y].hasCreeper) ||
-            (target.target->right && !rooms[x + 1][y].hasCreeper) ||
-            (target.target->top && !rooms[x][y - 1].hasCreeper) ||
-            (target.target->bottom && !rooms[x][y + 1].hasCreeper))
+        if ((target.left && !rooms[x - 1][y].hasCreeper) ||
+            (target.right && !rooms[x + 1][y].hasCreeper) ||
+            (target.top && !rooms[x][y - 1].hasCreeper) ||
+            (target.bottom && !rooms[x][y + 1].hasCreeper))
             creepers.push_back({x, y, &target});
     }
 }
@@ -62,13 +62,13 @@ inline void CreeperWalk::killCreeper(int x, int y)
     room &target = rooms[x][y];
 
     if (target.hasCreeper) {
-        if (target.target->left)
+        if (target.left)
             actualizeCreeper(x - 1, y);
-        if (target.target->right)
+        if (target.right)
             actualizeCreeper(x + 1, y);
-        if (target.target->top)
+        if (target.top)
             actualizeCreeper(x, y - 1);
-        if (target.target->bottom)
+        if (target.bottom)
             actualizeCreeper(x, y + 1);
         target.hasCreeper = false;
         target.hasChanged = true;
@@ -86,7 +86,7 @@ void CreeperWalk::update()
     newCreepers.clear();
     creeperify(spawnX, spawnY);
     for (position &value : creepers) {
-        if (!value.hasCreeper)
+        if (!value.target->hasCreeper)
             continue;
         bool unblocked = true;
         if (value.target->left)

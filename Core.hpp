@@ -48,6 +48,8 @@ public:
     //! For GlobalActivity
     std::vector<std::shared_ptr<DynamicItem>> &getDynamicItemList() {return animatedItems;}
     void setRoomSize(int offsetX, int offsetY, int width, int height) {x = offsetX; y = offsetY; roomWidth = width; roomHeight = height;}
+    inline int getRoomWidth() {return width;}
+    inline int getRoomHeight() {return height;}
 private:
     bool isAlive = false;
     bool isPaused = false;

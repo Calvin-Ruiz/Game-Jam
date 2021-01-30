@@ -5,14 +5,15 @@ SRC = Core.cpp \
       Item.cpp \
       main.cpp \
       ThreadedModule.cpp \
-	  Door.cpp \
-      WindowManager.cpp
+	Door.cpp \
+      WindowManager.cpp \
+      Room.cpp
 
 NAME = laby
 
 OBJ = $(SRC:.cpp=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -g3
 CC = g++
 BINFLAGS = -lpthread -lsfml-system -lsfml-window -lsfml-graphics
 

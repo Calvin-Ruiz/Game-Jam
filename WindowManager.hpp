@@ -18,13 +18,13 @@ public:
     WindowManager &operator=(const WindowManager &src) = default;
 
     //! For heavy initializations
-    virtual void initialize() override;
+    virtual void initialize() override {}
     //! Draw game
-    virtual void refresh() override;
+    virtual void refresh() override {}
     //! Manage game events
-    virtual void update() override;
+    virtual void update() override {}
     //! Manage pause menu
-    virtual void onPause() override;
+    virtual void onPause() override {}
 private:
 };
 

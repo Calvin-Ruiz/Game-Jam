@@ -25,6 +25,11 @@ public:
     GraphicPlayer(const GraphicPlayer &cpy) = delete;
     GraphicPlayer &operator=(const GraphicPlayer &src) = delete;
 
+    // call on each tick
+    void update();
+
+    void render();
+
     // define or redefine position
     void setPosition(int x, int y);
     // inform left movement
@@ -40,9 +45,11 @@ public:
     // set orientation
     void setDirection(orientation dir);
 private:
-    int speed;
-    int x;
-    int y;
+    float speed; // deplacement distance on each tick
+    int x; // case x
+    int y; // case y
+    float animate_x; // animation x, 0 = start, abs(1) = end
+    float animate_y; // animation y, 0 = start, abs(1) = end
     float health;
     orientation dir;
 };

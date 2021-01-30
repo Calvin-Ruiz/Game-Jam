@@ -8,39 +8,70 @@
 
 GraphicPlayer::GraphicPlayer()
 {
-    this->speed = 3;
+    this->speed = 0.2f;
+    this->animate_x = 0.0f;
+    this->animate_y = 0.0f;
+
+    this->setDirection(orientation::LEFT);
 }
 
 GraphicPlayer::~GraphicPlayer()
 {}
 
+void GraphicPlayer::update()
+{
+
+    if (this->animate_x == 0 || this->animate_y == 0)
+        return;
+
+    switch (this->dir) {
+        case orientation::LEFT:
+            this->animate_x += this->speed;
+            break;
+        case orientation::RIGHT:
+            this->animate_x -= this->speed;
+            break;
+        case orientation::TOP:
+            this->animate_y -= this->speed;
+            break;
+        case orientation::BOTTOM:
+            this->animate_y += this->speed;
+            break;
+    }
+
+    if (this->animate_x >= 1.0f || this->animate_x <= -1.0f)
+        this->animate_x = 0.0f;
+
+    if (this->animate_y >= 1.0f || this->animate_y <= -1.0f)
+        this->animate_y = 0.0f;
+}
+
 // define or redefine position
 void GraphicPlayer::setPosition(int x, int y) {
     this->x = x;
     this->y = y;
+
+    this->animate_x = 0.0f;
+    this->animate_y = 0.0f;
 }
 
 // inform left movement
 void GraphicPlayer::left() {
-    this->x += this->speed;
     this->setDirection(orientation::LEFT);
 }
 
 // inform right movement
 void GraphicPlayer::right() {
-    this->x -= this->speed;
     this->setDirection(orientation::RIGHT);
 }
 
 // inform top movement
 void GraphicPlayer::top() {
-    this->y -= this->speed;
     this->setDirection(orientation::TOP);
 }
 
 // inform bottom movement
 void GraphicPlayer::bottom() {
-    this->y += this->speed;
     this->setDirection(orientation::BOTTOM);
 }
 

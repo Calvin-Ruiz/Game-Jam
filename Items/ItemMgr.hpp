@@ -12,11 +12,12 @@
 #include <string>
 #include <memory>
 #include <array>
+#include <vector>
+#include <SFML/Graphics/Texture.hpp>
 class Item;
 
 namespace sf {
     class RenderWindow;
-    class Texture;
 };
 
 class ItemMgr {
@@ -29,7 +30,7 @@ public:
         MEDIKIT = 4,
         BULLET = 5,
         ROCKET = 6
-    }
+    };
     ItemMgr(sf::RenderWindow &window);
     virtual ~ItemMgr();
     ItemMgr(const ItemMgr &cpy) = default;
@@ -47,7 +48,7 @@ private:
         float value;
     };
     sf::RenderWindow &window;
-    std::array<sf::Texture, 7> itemData;
+    std::array<imgData, 7> itemData;
     std::vector<enum itemType> freq;
 };
 

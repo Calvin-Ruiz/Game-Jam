@@ -21,10 +21,6 @@ Core::Core()
 
 Core::~Core()
 {
-    isAlive = false;
-    for (auto &th : threads) {
-        th.join();
-    }
 }
 
 void Core::getCoordFromPos(int &_x, int &_y)
@@ -53,7 +49,7 @@ void Core::mainloop()
     std::string command = "\0";
 
     bool aliveProcess = false;
-    int timeout = 600; // 30 seconds
+    int timeout = 200; // 10 seconds
     while (!aliveProcess && timeout--) {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         aliveProcess = true;
@@ -73,6 +69,15 @@ void Core::mainloop()
             aliveProcess &= module->isReady();
         }
     }
+    isAlive = false;
+    for (auto &th : threads) {
+        th.join();
+    }
+    for (auto &md : modules) {
+        delete md;
+    }
+    threads.clear();
+    modules.clear();
 }
 
 void Core::startMainloop(int refreshFrequency, ThreadedModule *module)
@@ -104,7 +109,6 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
         if (actual < next)
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));
     }
-    delete module;
 }
 
 std::shared_ptr<DynamicItem> Core::getDynamicItem()

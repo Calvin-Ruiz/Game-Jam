@@ -38,6 +38,7 @@ public:
     void kill() {isAlive = false;}
     //! Convert position to screen coordinates
     void getCoordFromPos(int &x, int &y);
+    void getCenteredCoordFromPos(int &x, int &y);
     void getPosFromCoords(int &x, int &y);
     void clampPos(int &x, int &y);
     std::shared_ptr<DynamicItem> getDynamicItem();

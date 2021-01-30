@@ -18,13 +18,16 @@ DynamicItem::~DynamicItem()
 
 void DynamicItem::redefine(sf::Texture &texture, int _x, int _y, float _vel_x, float _vel_y, enum actionType _action)
 {
+    sprite.setTexture(texture, true);
+    auto tmp = sprite.getTextureRect();
+    _x -= tmp.width / 2;
+    _y -= tmp.height / 2;
+    sprite.setPosition(x, y);
     x = _x;
     y = _y;
     vel_x = _vel_x;
     vel_y = _vel_y;
     action = _action;
-    sprite.setTexture(texture, true);
-    sprite.setPosition(x, y);
     isOnLand = true;
 }
 

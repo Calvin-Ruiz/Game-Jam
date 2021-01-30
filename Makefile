@@ -7,7 +7,6 @@ SRC = Core.cpp \
       ThreadedModule.cpp \
 	  Door.cpp \
 	  DynamicItem.cpp \
-      WindowManager.cpp \
 	  StartMenu.cpp \
 	  TheExit.cpp \
 	  Key.cpp \

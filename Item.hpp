@@ -37,6 +37,8 @@ protected:
     sf::RenderWindow &window;
     sf::Sprite sprite;
     bool isOnLand = false;
+    //! attached value in percent
+    float value = 0;
 };
 
 #endif /* ITEM_HPP_ */

@@ -32,6 +32,8 @@ public:
     void right();
     void top();
     void bottom();
+    GraphicPlayer::orientation getOrientation() {return dir;}
+    static Player *instance;
 private:
     GraphicPlayer::orientation dir = GraphicPlayer::TOP;
     room *pos = nullptr;

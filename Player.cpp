@@ -9,8 +9,12 @@
 #include "Room.hpp"
 #include "Core.hpp"
 
+Player *Player::instance = nullptr;
+
 Player::Player(GraphicPlayer *gPlayer) : gPlayer(gPlayer)
-{}
+{
+    instance = this;
+}
 
 Player::~Player()
 {}

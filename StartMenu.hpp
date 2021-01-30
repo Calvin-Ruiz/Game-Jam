@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class StartMenu {
     public:
@@ -17,6 +18,7 @@ class StartMenu {
         virtual ~StartMenu();
 
         void mainloop();
+        void selectLvlLoop();
         sf::Sprite getMenuStartBackground();
         sf::Sprite getMenuButtonPlay();
         sf::Sprite getMenuButtonExit();

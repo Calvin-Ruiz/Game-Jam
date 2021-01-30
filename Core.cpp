@@ -27,6 +27,12 @@ Core::~Core()
     }
 }
 
+void Core::getCoordFromPos(int &_x, int &_y)
+{
+    _x = x + roomWidth * _x;
+    _y = y + roomHeight * _y;
+}
+
 void Core::mainloop()
 {
     std::string command = "\0";

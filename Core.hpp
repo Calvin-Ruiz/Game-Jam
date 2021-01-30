@@ -34,6 +34,8 @@ public:
     std::vector<std::vector<room>> rooms;
     //! Only WindowManager is allowed to use draw and drawInInventory
     std::vector<std::shared_ptr<Item>> &getItemList() {return items;}
+    //! Convert position to screen coordinates
+    void getCoordFromPos(int &x, int &y);
     static Core *core;
 private:
     bool isAlive = false;
@@ -42,6 +44,7 @@ private:
     std::vector<std::thread> threads;
     std::vector<ThreadedModule *> modules;
     std::vector<std::shared_ptr<Item>> items;
+    int x, y, roomWidth, roomHeight;
 };
 
 #endif /* CORE_HPP_ */

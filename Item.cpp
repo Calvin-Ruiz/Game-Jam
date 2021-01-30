@@ -39,6 +39,8 @@ bool Item::use(int x, int y)
     Item *&target = Core::core->rooms[x][y].item;
     if (target)
         return false;
+    Core::core->getCoordFromPos(x, y);
+    setPosition(x, y);
     target = this;
     return true;
 }

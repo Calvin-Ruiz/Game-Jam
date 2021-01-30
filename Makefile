@@ -8,7 +8,10 @@ SRC = Core.cpp \
 	  Door.cpp \
 	  DynamicItem.cpp \
       WindowManager.cpp \
-	  StartMenu.cpp
+	  StartMenu.cpp \
+	  TheExit.cpp \
+	  Key.cpp \
+      WindowManager.cpp
 
 NAME = laby
 

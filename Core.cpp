@@ -115,6 +115,7 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
         if (actual < next)
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));
     }
+    module->destroy();
 }
 
 std::shared_ptr<DynamicItem> Core::getDynamicItem()

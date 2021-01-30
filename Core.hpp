@@ -34,6 +34,7 @@ public:
     std::vector<std::vector<room>> rooms;
     //! Only WindowManager is allowed to use draw and drawInInventory
     std::vector<std::shared_ptr<Item>> &getItemList() {return items;}
+    static Core *core;
 private:
     bool isAlive = false;
     bool isPaused = false;

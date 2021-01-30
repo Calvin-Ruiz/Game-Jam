@@ -15,6 +15,7 @@
 namespace sf {
     class RenderWindow;
     class Texture;
+    class Sprite;
 };
 
 class Item {
@@ -24,10 +25,17 @@ public:
     Item(const Item &cpy) = default;
     Item &operator=(const Item &src) = default;
 
-    virtual void draw() = 0;
-    virtual void drawInInventory(int index) = 0;
+    virtual void setPosition(int x, int y);
+    virtual void draw();
+    virtual void drawInInventory();
+    //! take from the ground
+    virtual bool take() {isOnLand = false; return true;}
+    //! return true when this item must be removed of inventory
+    virtual bool use(int x, int y);
 protected:
     sf::RenderWindow &window;
+    sf::Sprite sprite;
+    bool isOnLand = true;
 };
 
 #endif /* ITEM_HPP_ */

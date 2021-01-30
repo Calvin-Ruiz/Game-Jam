@@ -12,8 +12,11 @@
 #include <chrono>
 #include <string>
 
+Core *Core::core = nullptr;
+
 Core::Core()
 {
+    core = this;
 }
 
 Core::~Core()

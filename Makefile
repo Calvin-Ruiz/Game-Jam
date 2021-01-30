@@ -13,6 +13,8 @@ SRC = Items/Blaster.cpp \
 	  StartMenu.cpp \
 	  Items/TheExit.cpp \
       ThreadedModule.cpp \
+	  Door.cpp \
+      Room.cpp
 	  WindowManager.cpp \
 	  Items/MediKit.cpp \
 	  Items/ItemMgr.cpp \

@@ -10,8 +10,7 @@ SRC = Core.cpp \
       WindowManager.cpp \
 	  StartMenu.cpp \
 	  TheExit.cpp \
-	  Key.cpp \
-      WindowManager.cpp
+	  Key.cpp
 
 NAME = laby
 

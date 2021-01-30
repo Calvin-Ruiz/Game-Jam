@@ -22,6 +22,14 @@ int main(/*int argc, char const *argv[]*/)
     window.setVerticalSyncEnabled(true);
     sf::Event event;
     StartMenu startMenu(window, event);
+    ItemMgr imgr(window);
+    imgr.setItemData(ItemMgr::BLASTER, "blaster.png", 3, 20);
+    imgr.setItemData(ItemMgr::BAZOOKA, "bazooka.png", 1, 2);
+    imgr.setItemData(ItemMgr::DOOR, "door.png", 5, 32);
+    imgr.setItemData(ItemMgr::KEY, "key.png", -1);
+    imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", 2);
+    imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 0.1f);
+    imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 0.15f);
 
     int width = 20;
     int height = 20;
@@ -34,6 +42,7 @@ int main(/*int argc, char const *argv[]*/)
         Core core;
         int x = 5, y = 5; // must be replaced by the entry location
         createLaby(core.getSeed(), width, height, core.rooms, core.getItemList());
+        imgr.setLoot();
 
         // Build everything here
         auto creep = new CreeperWalk(core.rooms);

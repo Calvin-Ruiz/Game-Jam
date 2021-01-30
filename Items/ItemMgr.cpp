@@ -30,6 +30,9 @@ bool ItemMgr::setItemData(enum itemType itype, const std::string &filename, floa
         freq.push_back(itype);
     if (!ret)
         std::cerr << "Failed to load image 'textures/" << filename << "'.\n";
+    ret = itemData[itype].tex.loadFromFile("textures/debug.png");
+    if (!ret)
+        std::cerr << "Failed to load replacement image 'textures/debug.png'.\n";
     return ret;
 }
 
@@ -74,22 +77,21 @@ void ItemMgr::setLoot()
             do {
                 pos = single(rdevice);
             } while (rooms[pos % rooms.size()][pos / rooms.size()].item);
-            rooms[pos % rooms.size()][pos / rooms.size()].item = create((enum itemType) i);
+            create((enum itemType) i)->drop(pos % rooms.size(), pos / rooms.size());
         }
         i++;
     }
 
-    for (auto &line : rooms) {
-        for (auto &room : line) {
-            if (room.item)
+    for (unsigned int y = 0; y < rooms[0].size(); y++) {
+        for (unsigned int x = 0; x < rooms.size(); x++) {
+            if (rooms[x][y].item)
                 continue;
             float frequency = distr(rdevice);
             for (auto f : freq) {
                 frequency -= itemData[f].frequency;
                 if (frequency > 0)
                     continue;
-                room.item = create(f);
-                room.isBlocking = (f == DOOR);
+                create(f)->drop(x, y);
                 break;
             }
         }

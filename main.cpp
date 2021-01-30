@@ -13,12 +13,13 @@
 #include "GlobalActivity.hpp"
 #include "CreeperWalk.hpp"
 #include "WindowManager.hpp"
+#include "CreeperDisplay.hpp"
 
 #include "Room.hpp"
 
 int main(/*int argc, char const *argv[]*/)
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Labyrinth", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Amoeba Dungeon", sf::Style::Default);
     window.setVerticalSyncEnabled(true);
     sf::Event event;
     StartMenu startMenu(window, event);
@@ -45,9 +46,11 @@ int main(/*int argc, char const *argv[]*/)
         imgr.setLoot();
 
         // Build everything here
-        auto creep = new CreeperWalk(core.rooms);
-        creep->reset(150, 25, x, y); // 30 seconds before creeper comes, then 5 seconds per step
-        core.startMainloop(5, creep);
+        auto cd = new CreeperDisplay(window, core.rooms);
+        auto cw = new CreeperWalk(core.rooms);
+        cw->reset(150, 25, x, y); // 30 seconds before creeper comes, then 5 seconds per step
+        core.startMainloop(30, cd);
+        core.startMainloop(5, cw);
         core.startMainloop(20, new GlobalActivity());
         //core.startMainloop(60, new WindowManager(window));
         core.mainloop();

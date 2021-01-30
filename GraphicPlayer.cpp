@@ -39,11 +39,25 @@ void GraphicPlayer::update()
             break;
     }
 
-    if (this->animate_x >= 1.0f || this->animate_x <= -1.0f)
+    if (this->animate_x >= 1.0f) {
         this->animate_x = 0.0f;
+        this->x++;
+    }
 
-    if (this->animate_y >= 1.0f || this->animate_y <= -1.0f)
+    if (this->animate_x <= -1.0f) {
+        this->animate_x = 0.0f;
+        this->x--;
+    }
+
+    if (this->animate_y >= 1.0f) {
         this->animate_y = 0.0f;
+        this->y++;
+    }
+
+    if (this->animate_y <= -1.0f) {
+        this->animate_y = 0.0f;
+        this->y--;
+    }
 }
 
 // define or redefine position

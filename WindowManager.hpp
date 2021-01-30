@@ -26,14 +26,9 @@ public:
     virtual void update() override;
     //! Manage pause menu
     virtual void onPause() override;
+
 private:
     sf::RenderWindow &window;
-    sf::Texture menuStartBackgroundT;
-    sf::Sprite menuStartBackgroundS;
-    sf::Texture menuButtonPlayT;
-    sf::Sprite menuButtonPlayS;
-    sf::Texture menuButtonExitT;
-    sf::Sprite menuButtonExitS;
 };
 
 #endif /* WINDOW_MANAGER_HPP_ */

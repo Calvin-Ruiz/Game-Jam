@@ -26,6 +26,7 @@ public:
     Item &operator=(const Item &src) = default;
 
     virtual void setPosition(int x, int y);
+    virtual bool drop(int x, int y);
     virtual void draw();
     virtual void drawInInventory();
     //! take from the ground

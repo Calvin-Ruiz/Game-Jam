@@ -22,6 +22,17 @@ void Item::setPosition(int x, int y)
     sprite.setPosition(x, y);
 }
 
+bool Item::drop(int x, int y)
+{
+    Item *&target = Core::core->rooms[x][y].item;
+    if (target)
+        return false;
+    Core::core->getCoordFromPos(x, y);
+    setPosition(x, y);
+    target = this;
+    return true;
+}
+
 void Item::draw()
 {
     if (isOnLand) {
@@ -36,11 +47,5 @@ void Item::drawInInventory()
 
 bool Item::use(int x, int y)
 {
-    Item *&target = Core::core->rooms[x][y].item;
-    if (target)
-        return false;
-    Core::core->getCoordFromPos(x, y);
-    setPosition(x, y);
-    target = this;
-    return true;
+    return (drop(x, y));
 }

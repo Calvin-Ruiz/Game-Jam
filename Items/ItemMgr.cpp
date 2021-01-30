@@ -89,6 +89,7 @@ void ItemMgr::setLoot()
                 if (frequency > 0)
                     continue;
                 room.item = create(f);
+                room.isBlocking = (f == DOOR);
                 break;
             }
         }

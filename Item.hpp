@@ -36,7 +36,7 @@ public:
 protected:
     sf::RenderWindow &window;
     sf::Sprite sprite;
-    bool isOnLand = true;
+    bool isOnLand = false;
 };
 
 #endif /* ITEM_HPP_ */

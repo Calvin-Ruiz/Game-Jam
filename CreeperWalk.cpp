@@ -7,8 +7,12 @@
 #include "CreeperWalk.hpp"
 #include "Door.hpp"
 
+CreeperWalk *CreeperWalk::instance = nullptr;
+
 CreeperWalk::CreeperWalk(std::vector<std::vector<room>> &rooms) : rooms(rooms)
-{}
+{
+    instance = this;
+}
 
 CreeperWalk::~CreeperWalk()
 {}
@@ -42,37 +46,6 @@ inline bool CreeperWalk::creeperify(int x, int y)
         newCreepers.push_back({x, y, &target});
     }
     return true;
-}
-
-inline void CreeperWalk::actualizeCreeper(int x, int y)
-{
-    room &target = rooms[x][y];
-
-    if (target.hasCreeper) {
-        if ((target.left && !rooms[x - 1][y].hasCreeper) ||
-            (target.right && !rooms[x + 1][y].hasCreeper) ||
-            (target.top && !rooms[x][y - 1].hasCreeper) ||
-            (target.bottom && !rooms[x][y + 1].hasCreeper))
-            creepers.push_back({x, y, &target});
-    }
-}
-
-inline void CreeperWalk::killCreeper(int x, int y)
-{
-    room &target = rooms[x][y];
-
-    if (target.hasCreeper) {
-        if (target.left)
-            actualizeCreeper(x - 1, y);
-        if (target.right)
-            actualizeCreeper(x + 1, y);
-        if (target.top)
-            actualizeCreeper(x, y - 1);
-        if (target.bottom)
-            actualizeCreeper(x, y + 1);
-        target.hasCreeper = false;
-        target.hasChanged = true;
-    }
 }
 
 void CreeperWalk::update()

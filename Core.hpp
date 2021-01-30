@@ -16,6 +16,7 @@
 struct room;
 class ThreadedModule;
 class Item;
+class DynamicItem;
 
 class Core {
 public:
@@ -37,6 +38,9 @@ public:
     void kill() {isAlive = false;}
     //! Convert position to screen coordinates
     void getCoordFromPos(int &x, int &y);
+    void getPosFromCoords(int &x, int &y);
+    void clampPos(int &x, int &y);
+    std::shared_ptr<DynamicItem> getDynamicItem();
     static Core *core;
 private:
     bool isAlive = false;
@@ -45,7 +49,9 @@ private:
     std::vector<std::thread> threads;
     std::vector<ThreadedModule *> modules;
     std::vector<std::shared_ptr<Item>> items;
+    std::vector<std::shared_ptr<DynamicItem>> animatedItems;
     int x, y, roomWidth, roomHeight;
+    unsigned int dynamicItemIndex = 0;
 };
 
 #endif /* CORE_HPP_ */

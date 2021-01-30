@@ -6,6 +6,7 @@ SRC = Core.cpp \
       main.cpp \
       ThreadedModule.cpp \
 	  Door.cpp \
+	  DynamicItem.cpp \
       WindowManager.cpp
 
 NAME = laby

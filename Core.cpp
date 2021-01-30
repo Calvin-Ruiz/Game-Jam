@@ -33,6 +33,21 @@ void Core::getCoordFromPos(int &_x, int &_y)
     _y = y + roomHeight * _y;
 }
 
+void Core::clampPos(int &_x, int &_y)
+{
+    if (_x >= (int) rooms.size()) _x = rooms.size() - 1;
+    if (_y >= (int) rooms[0].size()) _y = rooms[0].size() - 1;
+    if (_x < 0) _x = 0;
+    if (_y < 0) _y = 0;
+}
+
+void Core::getPosFromCoords(int &_x, int &_y)
+{
+    _x = (_x - x) / roomWidth;
+    _y = (_y - y) / roomHeight;
+    clampPos(_x, _y);
+}
+
 void Core::mainloop()
 {
     std::string command = "\0";
@@ -90,4 +105,11 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));
     }
     delete module;
+}
+
+std::shared_ptr<DynamicItem> Core::getDynamicItem()
+{
+    if (dynamicItemIndex == animatedItems.size())
+        dynamicItemIndex = 0;
+    return (animatedItems[dynamicItemIndex++]);
 }

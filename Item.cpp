@@ -29,6 +29,7 @@ bool Item::drop(int x, int y)
         return false;
     Core::core->getCoordFromPos(x, y);
     setPosition(x, y);
+    isOnLand = true;
     target = this;
     return true;
 }

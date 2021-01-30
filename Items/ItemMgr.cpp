@@ -22,14 +22,14 @@ ItemMgr::~ItemMgr()
 
 bool ItemMgr::setItemData(enum itemType itype, const std::string &filename, float frequency, float value)
 {
-    bool ret = itemData[itype].tex.loadFromFile(filename);
+    bool ret = itemData[itype].tex.loadFromFile(std::string("textures/") + filename);
     itemData[itype].frequency = frequency;
     itemData[itype].value = value;
 
     if (frequency > 0)
         freq.push_back(itype);
     if (!ret)
-        std::cerr << "Failed to load image '" << filename << "'.\n";
+        std::cerr << "Failed to load image 'textures/" << filename << "'.\n";
     return ret;
 }
 

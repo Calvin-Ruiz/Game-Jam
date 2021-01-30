@@ -66,7 +66,7 @@ void Core::mainloop()
         std::cerr << "Timeout : Modules has taken too many time to start.\n";
         return;
     }
-    bool isAlive = true;
+    isAlive = true;
     while (isAlive && aliveProcess) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         for (auto &module : modules) {

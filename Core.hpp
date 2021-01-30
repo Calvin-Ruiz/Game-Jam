@@ -42,6 +42,7 @@ public:
     void clampPos(int &x, int &y);
     std::shared_ptr<DynamicItem> getDynamicItem();
     static Core *core;
+    bool isCompleted = false;
 private:
     bool isAlive = false;
     bool isPaused = false;

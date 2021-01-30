@@ -11,6 +11,7 @@
 #include <SFML/System/Clock.hpp>
 #include <chrono>
 #include <string>
+#include <random>
 
 Core *Core::core = nullptr;
 
@@ -21,6 +22,12 @@ Core::Core()
 
 Core::~Core()
 {
+}
+
+int Core::getSeed()
+{
+    std::random_device rdev;
+    return rdev();
 }
 
 void Core::getCoordFromPos(int &_x, int &_y)

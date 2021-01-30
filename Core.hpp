@@ -41,6 +41,7 @@ public:
     void getCenteredCoordFromPos(int &x, int &y);
     void getPosFromCoords(int &x, int &y);
     void clampPos(int &x, int &y);
+    int getSeed();
     std::shared_ptr<DynamicItem> getDynamicItem();
     static Core *core;
     bool isCompleted = false;

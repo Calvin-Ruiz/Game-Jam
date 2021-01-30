@@ -21,7 +21,7 @@ namespace sf {
 
 class Item {
 public:
-    Item(sf::RenderWindow &window, sf::Texture &texture);
+    Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount = 8, int fullTime = 60);
     virtual ~Item();
     Item(const Item &cpy) = default;
     Item &operator=(const Item &src) = default;
@@ -43,6 +43,9 @@ protected:
 private:
     sf::VertexArray buffer;
     float lastValue = 0;
+    int time = 0;
+    int fullTime;
+    int phaseCount;
 };
 
 #endif /* ITEM_HPP_ */

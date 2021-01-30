@@ -15,6 +15,7 @@ SRC = Items/Blaster.cpp \
       ThreadedModule.cpp \
 	  WindowManager.cpp \
 	  Items/MediKit.cpp \
+	  Items/ImageMgr.cpp \
 
 NAME = laby
 

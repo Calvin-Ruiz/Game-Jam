@@ -40,6 +40,11 @@ public:
     // set orientation
     void setDirection(orientation dir);
 private:
+    int speed;
+    int x;
+    int y;
+    float health;
+    orientation dir;
 };
 
 #endif /* GRAPHICPLAYER_HPP_ */

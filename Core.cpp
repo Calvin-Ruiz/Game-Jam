@@ -69,7 +69,7 @@ void Core::startMainloop(int refreshFrequency, ThreadedModule *module)
 void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, ThreadedModule *module)
 {
     bool &isAlive = *pIsAlive;
-    bool &isPaused = *pIsAlive;
+    bool &isPaused = *pIsPaused;
     refreshFrequency = 1000000/refreshFrequency;
     module->initialize();
 

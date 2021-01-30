@@ -15,6 +15,8 @@ Item::Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount, int f
     window(window), sprite(texture), buffer(sf::PrimitiveType::TriangleStrip, 4), fullTime(fullTime), phaseCount(phaseCount)
 {
     buffer[0].color = buffer[1].color = buffer[2].color = buffer[3].color = sf::Color::Green;
+    rect = sprite.getTextureRect();
+    rect.width /= phaseCount;
 }
 
 Item::~Item()
@@ -47,7 +49,8 @@ void Item::draw()
 
 void Item::drawInInventory()
 {
-    // should use sprite[phaseCount * time / fullTime] instead
+    rect.left = rect.width * (phaseCount * time / fullTime);
+    sprite.setTextureRect(rect);
     window.draw(sprite);
     if (++time >= fullTime)
         time = 0;

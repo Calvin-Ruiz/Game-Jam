@@ -21,7 +21,7 @@ namespace sf {
 
 class Item {
 public:
-    Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount = 8, int fullTime = 60);
+    Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount = 4, int fullTime = 60);
     virtual ~Item();
     Item(const Item &cpy) = default;
     Item &operator=(const Item &src) = default;
@@ -37,6 +37,7 @@ public:
 protected:
     sf::RenderWindow &window;
     sf::Sprite sprite;
+    sf::IntRect rect;
     bool isOnLand = false;
     //! attached value in percent
     float value = 0;

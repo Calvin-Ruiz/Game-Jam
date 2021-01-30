@@ -8,6 +8,7 @@
 #include "GraphicPlayer.hpp"
 #include "Room.hpp"
 #include "Core.hpp"
+#include "Item.hpp"
 
 Player *Player::instance = nullptr;
 
@@ -39,7 +40,7 @@ void Player::left()
 
 void Player::right()
 {
-    dir = GraphicPlayer::RIGTH;
+    dir = GraphicPlayer::RIGHT;
     gPlayer->setDirection(dir);
     if (pos->right) {
         gPlayer->right();

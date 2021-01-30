@@ -14,6 +14,7 @@
 #include <array>
 #include "GraphicPlayer.hpp"
 class room;
+class Item;
 
 class Player {
 public:

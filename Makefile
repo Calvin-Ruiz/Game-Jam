@@ -1,15 +1,19 @@
 
-SRC = Core.cpp \
+SRC = Blaster.cpp \
+	  Core.cpp \
       CreeperWalk.cpp \
-      GlobalActivity.cpp \
-      Item.cpp \
-      main.cpp \
-      ThreadedModule.cpp \
 	  Door.cpp \
 	  DynamicItem.cpp \
+      GlobalActivity.cpp \
+	  GraphicPlayer.cpp \
+      Item.cpp \
+	  Key.cpp \
+      main.cpp \
+	  Player.cpp \
 	  StartMenu.cpp \
 	  TheExit.cpp \
-	  Key.cpp
+      ThreadedModule.cpp \
+	  WindowManager.cpp \
 
 NAME = laby
 

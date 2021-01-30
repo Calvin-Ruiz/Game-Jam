@@ -29,6 +29,12 @@ void Core::getCoordFromPos(int &_x, int &_y)
     _y = y + roomHeight * _y;
 }
 
+void Core::getCenteredCoordFromPos(int &_x, int &_y)
+{
+    _x = roomWidth * _x + roomWidth / 2;
+    _y = roomHeight * _y + roomHeight / 2;
+}
+
 void Core::clampPos(int &_x, int &_y)
 {
     if (_x >= (int) rooms.size()) _x = rooms.size() - 1;

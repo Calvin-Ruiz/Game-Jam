@@ -13,17 +13,16 @@ CreeperWalk::CreeperWalk(std::vector<std::vector<room>> &rooms) : rooms(rooms)
 CreeperWalk::~CreeperWalk()
 {}
 
-void CreeperWalk::reset(int time, int x, int y)
+void CreeperWalk::reset(int time, int interval, int x, int y)
 {
-    mtx.lock();
     creepers.clear();
     spawnTime = time;
+    spawnInterval = interval;
     spawnX = x;
     spawnY = y;
-    mtx.unlock();
 }
 
-inline void CreeperWalk::creeperify(int x, int y)
+inline bool CreeperWalk::creeperify(int x, int y)
 {
     room &target = rooms[x][y];
 
@@ -35,12 +34,44 @@ inline void CreeperWalk::creeperify(int x, int y)
                     // The door is broken !
                     target.item = nullptr;
                 else // The door resist
-                    return;
+                    return false;
             }
         }
         target.hasCreeper = true;
         target.hasChanged = true;
         newCreepers.push_back({x, y, &target});
+    }
+    return true;
+}
+
+inline void CreeperWalk::actualizeCreeper(int x, int y)
+{
+    room &target = rooms[x][y];
+
+    if (target.hasCreeper) {
+        if ((target.target->left && !rooms[x - 1][y].hasCreeper) ||
+            (target.target->right && !rooms[x + 1][y].hasCreeper) ||
+            (target.target->top && !rooms[x][y - 1].hasCreeper) ||
+            (target.target->bottom && !rooms[x][y + 1].hasCreeper))
+            creepers.push_back({x, y, &target});
+    }
+}
+
+inline void CreeperWalk::killCreeper(int x, int y)
+{
+    room &target = rooms[x][y];
+
+    if (target.hasCreeper) {
+        if (target.target->left)
+            actualizeCreeper(x - 1, y);
+        if (target.target->right)
+            actualizeCreeper(x + 1, y);
+        if (target.target->top)
+            actualizeCreeper(x, y - 1);
+        if (target.target->bottom)
+            actualizeCreeper(x, y + 1);
+        target.hasCreeper = false;
+        target.hasChanged = true;
     }
 }
 
@@ -49,20 +80,27 @@ void CreeperWalk::update()
     mtx.lock();
     if (spawnTime) {
         spawnTime--;
+        mtx.unlock();
         return;
     }
     newCreepers.clear();
     creeperify(spawnX, spawnY);
     for (position &value : creepers) {
+        if (!value.hasCreeper)
+            continue;
+        bool unblocked = true;
         if (value.target->left)
-            creeperify(value.x - 1, value.y);
+            unblocked &= creeperify(value.x - 1, value.y);
         if (value.target->right)
-            creeperify(value.x + 1, value.y);
+            unblocked &= creeperify(value.x + 1, value.y);
         if (value.target->top)
-            creeperify(value.x, value.y - 1);
+            unblocked &= creeperify(value.x, value.y - 1);
         if (value.target->bottom)
-            creeperify(value.x, value.y + 1);
+            unblocked &= creeperify(value.x, value.y + 1);
+        if (!unblocked)
+            newCreepers.push_back(value);
     }
     creepers.swap(newCreepers);
+    spawnTime = spawnInterval;
     mtx.unlock();
 }

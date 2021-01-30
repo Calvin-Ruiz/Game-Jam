@@ -27,20 +27,21 @@ void CreeperDisplay::preDraw()
 {
     for (int x = this->x; x < width; ++x) {
         auto &b = buffers[x];
+        auto &bc = bufferContent[x];
         for (int y = this->y; y < height; ++y) {
             if (rooms[x][y].hasChanged) {
                 if (rooms[x][y].hasCreeper) {
-                    bufferContent[x][y * 6].position.x = bufferContent[x][y * 6 + 1].position.x = bufferContent[x][y * 6 + 3].position.x;
-                    bufferContent[x][y * 6].position.y = bufferContent[x][y * 6 + 2].position.y = bufferContent[x][y * 6 + 4].position.y;
-                    bufferContent[x][y * 6 + 5].position.x = bufferContent[x][y * 6 + 2].position.x = bufferContent[x][y * 6 + 4].position.x;
-                    bufferContent[x][y * 6 + 5].position.y = bufferContent[x][y * 6 + 1].position.y = bufferContent[x][y * 6 + 3].position.y;
+                    bc[y * 6].position.x = bc[y * 6 + 1].position.x = bc[y * 6 + 3].position.x;
+                    bc[y * 6].position.y = bc[y * 6 + 2].position.y = bc[y * 6 + 4].position.y;
+                    bc[y * 6 + 5].position.x = bc[y * 6 + 2].position.x = bc[y * 6 + 4].position.x;
+                    bc[y * 6 + 5].position.y = bc[y * 6 + 1].position.y = bc[y * 6 + 3].position.y;
                 } else {
-                    bufferContent[x][y * 6] = bufferContent[x][y * 6 + 1] = bufferContent[x][y * 6 + 2]
-                    = bufferContent[x][y * 6 + 3] = bufferContent[x][y * 6 + 4] = bufferContent[x][y * 6 + 5]
+                    bc[y * 6] = bc[y * 6 + 1] = bc[y * 6 + 2]
+                    = bc[y * 6 + 3] = bc[y * 6 + 4] = bc[y * 6 + 5]
                     = sf::Vertex(sf::Vector2f(0, 0), sf::Color(96, 0, 255, 63));
                 }
                 rooms[x][y].hasChanged = false;
-                buffers[x].update(bufferContent[x].data() + y * 6, y, 6);
+                b.update(bc.data() + y * 6, y, 6);
             }
         }
     }

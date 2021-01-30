@@ -19,16 +19,23 @@ public:
     WindowManager &operator=(const WindowManager &src) = default;
 
     //! For heavy initializations
-    virtual void initialize() override;
+    void initialize() override;
     //! Draw game
-    virtual void refresh() override;
+    // virtual void refresh() override;
     //! Manage game events
-    virtual void update() override;
+    // virtual void update() override;
     //! Manage pause menu
-    virtual void onPause() override;
+    void onPause() override;
 
 private:
     sf::RenderWindow &window;
+    sf::Texture menuButtonResumeT;
+    sf::Sprite menuButtonResumeS;
+    sf::Texture menuButtonRetryT;
+    sf::Sprite menuButtonRetryS;
+    sf::Texture menuButtonLeaveT;
+    sf::Sprite menuButtonLeaveS;
+    sf::RectangleShape rectangle;
 };
 
 #endif /* WINDOW_MANAGER_HPP_ */

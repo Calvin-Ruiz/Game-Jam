@@ -29,13 +29,13 @@ void StartMenu::mainloop()
 {
     bool buttonClick = false;
     while (buttonClick == false) {
-        sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-        this->menuButtonPlayS.setPosition(sf::Vector2f(100, 100));
-        this->menuButtonExitS.setPosition(sf::Vector2f(200, 200));
+        sf::Vector2i localPosition = sf::Mouse::getPosition(this->window);
+        this->menuButtonPlayS.setPosition((this->window.getSize().x / 2) - 160 - 200, (this->window.getSize().y / 2) + 150);
+        this->menuButtonExitS.setPosition((this->window.getSize().x / 2) - 160 + 350, (this->window.getSize().y / 2) + 150);
 
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && 
-            localPosition.x >= this->menuButtonPlayS.getPosition().x + 160 && 
-            localPosition.x <= this->menuButtonPlayS.getPosition().x && 
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
+            localPosition.x <= this->menuButtonPlayS.getPosition().x + 160 && 
+            localPosition.x >= this->menuButtonPlayS.getPosition().x && 
             localPosition.y <= this->menuButtonPlayS.getPosition().y + 80 && 
             localPosition.y >= this->menuButtonPlayS.getPosition().y) {
             this->menuButtonPlayS.setTextureRect(sf::IntRect(320, 0, 160, 80));
@@ -49,9 +49,9 @@ void StartMenu::mainloop()
             this->menuButtonPlayS.setTextureRect(sf::IntRect(0, 0, 160, 80));
         }
 
-        if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && 
-            localPosition.x >= this->menuButtonExitS.getPosition().x + 160 && 
-            localPosition.x <= this->menuButtonExitS.getPosition().x && 
+        if (this->event.type == sf::Event::MouseButtonPressed && this->event.mouseButton.button == sf::Mouse::Left && 
+            localPosition.x <= this->menuButtonExitS.getPosition().x + 160 && 
+            localPosition.x >= this->menuButtonExitS.getPosition().x && 
             localPosition.y <= this->menuButtonExitS.getPosition().y + 80 && 
             localPosition.y >= this->menuButtonExitS.getPosition().y) {
             this->menuButtonExitS.setTextureRect(sf::IntRect(320, 0, 160, 80));
@@ -65,11 +65,11 @@ void StartMenu::mainloop()
             this->menuButtonExitS.setTextureRect(sf::IntRect(0, 0, 160, 80));
         }
 
-        window.clear();
-        window.draw(this->menuStartBackgroundS);
-        window.draw(this->menuButtonPlayS);
-        window.draw(this->menuButtonExitS);
-        window.display();
+        this->window.clear();
+        this->window.draw(this->menuStartBackgroundS);
+        this->window.draw(this->menuButtonPlayS);
+        this->window.draw(this->menuButtonExitS);
+        this->window.display();
     }
 }
 

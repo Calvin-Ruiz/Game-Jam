@@ -23,7 +23,7 @@ CreeperDisplay::CreeperDisplay(sf::RenderWindow &window, std::vector<std::vector
 CreeperDisplay::~CreeperDisplay()
 {}
 
-void CreeperDisplay::preDraw()
+void CreeperDisplay::update()
 {
     for (int x = this->x; x < width; ++x) {
         auto &b = buffers[x];

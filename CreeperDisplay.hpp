@@ -13,13 +13,14 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics/VertexBuffer.hpp>
+#include "ThreadedModule.hpp"
 class room;
 
 namespace sf {
     class RenderWindow;
 }
 
-class CreeperDisplay {
+class CreeperDisplay : public ThreadedModule {
 public:
     CreeperDisplay(sf::RenderWindow &window, std::vector<std::vector<room>> &rooms);
     virtual ~CreeperDisplay();
@@ -29,7 +30,7 @@ public:
     void setDimension(int height, int width);
     void setOrigin(int x, int y);
     // Better if called in a dedicated thread
-    void preDraw();
+    virtual void update() override;
     void draw();
 private:
     sf::RenderWindow &window;

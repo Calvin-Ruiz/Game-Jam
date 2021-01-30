@@ -12,16 +12,42 @@
 #include <chrono>
 #include <string>
 
+Core *Core::core = nullptr;
+
 Core::Core()
 {
+    core = this;
 }
 
 Core::~Core()
 {
-    isAlive = false;
-    for (auto &th : threads) {
-        th.join();
-    }
+}
+
+void Core::getCoordFromPos(int &_x, int &_y)
+{
+    _x = x + roomWidth * _x;
+    _y = y + roomHeight * _y;
+}
+
+void Core::getCenteredCoordFromPos(int &_x, int &_y)
+{
+    _x = roomWidth * _x + roomWidth / 2;
+    _y = roomHeight * _y + roomHeight / 2;
+}
+
+void Core::clampPos(int &_x, int &_y)
+{
+    if (_x >= (int) rooms.size()) _x = rooms.size() - 1;
+    if (_y >= (int) rooms[0].size()) _y = rooms[0].size() - 1;
+    if (_x < 0) _x = 0;
+    if (_y < 0) _y = 0;
+}
+
+void Core::getPosFromCoords(int &_x, int &_y)
+{
+    _x = (_x - x) / roomWidth;
+    _y = (_y - y) / roomHeight;
+    clampPos(_x, _y);
 }
 
 void Core::mainloop()
@@ -29,7 +55,7 @@ void Core::mainloop()
     std::string command = "\0";
 
     bool aliveProcess = false;
-    int timeout = 600; // 30 seconds
+    int timeout = 200; // 10 seconds
     while (!aliveProcess && timeout--) {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         aliveProcess = true;
@@ -42,13 +68,22 @@ void Core::mainloop()
         std::cerr << "Timeout : Modules has taken too many time to start.\n";
         return;
     }
-    bool isAlive = true;
+    isAlive = true;
     while (isAlive && aliveProcess) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         for (auto &module : modules) {
             aliveProcess &= module->isReady();
         }
     }
+    isAlive = false;
+    for (auto &th : threads) {
+        th.join();
+    }
+    for (auto &md : modules) {
+        delete md;
+    }
+    threads.clear();
+    modules.clear();
 }
 
 void Core::startMainloop(int refreshFrequency, ThreadedModule *module)
@@ -60,7 +95,7 @@ void Core::startMainloop(int refreshFrequency, ThreadedModule *module)
 void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, ThreadedModule *module)
 {
     bool &isAlive = *pIsAlive;
-    bool &isPaused = *pIsAlive;
+    bool &isPaused = *pIsPaused;
     refreshFrequency = 1000000/refreshFrequency;
     module->initialize();
 
@@ -80,5 +115,12 @@ void Core::threadLoop(bool *pIsAlive, bool *pIsPaused, int refreshFrequency, Thr
         if (actual < next)
             std::this_thread::sleep_for(std::chrono::microseconds(next - actual));
     }
-    delete module;
+    module->destroy();
+}
+
+std::shared_ptr<DynamicItem> Core::getDynamicItem()
+{
+    if (dynamicItemIndex == animatedItems.size())
+        dynamicItemIndex = 0;
+    return (animatedItems[dynamicItemIndex++]);
 }

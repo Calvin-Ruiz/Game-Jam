@@ -27,6 +27,8 @@ public:
     virtual void update() = 0;
     //! Only called while paused
     virtual void onPause() {}
+    //! For heavy destructions
+    virtual void destroy() {}
     //! Tell if initialization has completed
     virtual bool isReady() {return ready;}
 protected:

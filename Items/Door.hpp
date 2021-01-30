@@ -12,13 +12,14 @@
 
 class Door : public Item {
 public:
-    Door(sf::RenderWindow &window, sf::Texture &texture, int health = 100);
+    Door(sf::RenderWindow &window, sf::Texture &texture, int health = 16);
     virtual ~Door();
     Door(const Door &cpy) = default;
     Door &operator=(const Door &src) = default;
 
     bool damage();
 private:
+    int maxHealth;
     int health;
 };
 

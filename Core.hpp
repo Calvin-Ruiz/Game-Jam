@@ -16,6 +16,7 @@
 struct room;
 class ThreadedModule;
 class Item;
+class DynamicItem;
 
 class Core {
 public:
@@ -34,6 +35,17 @@ public:
     std::vector<std::vector<room>> rooms;
     //! Only WindowManager is allowed to use draw and drawInInventory
     std::vector<std::shared_ptr<Item>> &getItemList() {return items;}
+    void kill() {isAlive = false;}
+    //! Convert position to screen coordinates
+    void getCoordFromPos(int &x, int &y);
+    void getCenteredCoordFromPos(int &x, int &y);
+    void getPosFromCoords(int &x, int &y);
+    void clampPos(int &x, int &y);
+    std::shared_ptr<DynamicItem> getDynamicItem();
+    static Core *core;
+    bool isCompleted = false;
+    //! For GlobalActivity
+    std::vector<std::shared_ptr<DynamicItem>> &getDynamicItemList() {return animatedItems;}
 private:
     bool isAlive = false;
     bool isPaused = false;
@@ -41,6 +53,9 @@ private:
     std::vector<std::thread> threads;
     std::vector<ThreadedModule *> modules;
     std::vector<std::shared_ptr<Item>> items;
+    std::vector<std::shared_ptr<DynamicItem>> animatedItems;
+    int x, y, roomWidth, roomHeight;
+    unsigned int dynamicItemIndex = 0;
 };
 
 #endif /* CORE_HPP_ */

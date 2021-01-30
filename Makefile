@@ -1,19 +1,29 @@
 
-SRC = Core.cpp \
+SRC = Items/Blaster.cpp \
+	  Core.cpp \
       CreeperWalk.cpp \
+	  Items/Door.cpp \
+	  Items/DynamicItem.cpp \
       GlobalActivity.cpp \
-      Item.cpp \
+	  GraphicPlayer.cpp \
+      Items/Item.cpp \
+	  Items/Key.cpp \
       main.cpp \
+	  Player.cpp \
+	  StartMenu.cpp \
+	  Items/TheExit.cpp \
       ThreadedModule.cpp \
-	Door.cpp \
-      WindowManager.cpp \
+	  Door.cpp \
       Room.cpp
+	  WindowManager.cpp \
+	  Items/MediKit.cpp \
+	  Items/ImageMgr.cpp \
 
 NAME = laby
 
 OBJ = $(SRC:.cpp=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g -g3
+CPPFLAGS = -Wall -Wextra -I . -I Items
 CC = g++
 BINFLAGS = -lpthread -lsfml-system -lsfml-window -lsfml-graphics
 

@@ -17,6 +17,7 @@ SRC = Items/Blaster.cpp \
 	  WindowManager.cpp \
 	  Items/MediKit.cpp \
 	  Items/ItemMgr.cpp \
+	  CreeperDisplay.cpp \
 
 NAME = laby
 

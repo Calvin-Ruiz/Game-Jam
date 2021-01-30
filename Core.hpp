@@ -47,6 +47,7 @@ public:
     bool isCompleted = false;
     //! For GlobalActivity
     std::vector<std::shared_ptr<DynamicItem>> &getDynamicItemList() {return animatedItems;}
+    void setRoomSize(int offsetX, int offsetY, int width, int height) {x = offsetX; y = offsetY; roomWidth = width; roomHeight = height;}
 private:
     bool isAlive = false;
     bool isPaused = false;

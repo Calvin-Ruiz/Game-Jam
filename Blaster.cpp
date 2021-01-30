@@ -9,7 +9,7 @@
 #include "Player.hpp"
 
 Blaster::Blaster(sf::RenderWindow &window, sf::Texture &texture, sf::Texture &bulletTexture, float speed, int ammos, DynamicItem::actionType action) :
-    Item(window, texture), bulletTexture(bulletTexture), speed(speed), ammos(ammos), action(action)
+    Item(window, texture), bulletTexture(bulletTexture), speed(speed), maxAmmos(ammos), ammos(ammos), action(action)
 {}
 
 Blaster::~Blaster()
@@ -33,5 +33,8 @@ bool Blaster::use(int _x, int _y)
             tmp->redefine(bulletTexture, _x, _y, 0, speed, action);
             break;
     }
-    return (--ammos <= 0);
+    if (--ammos <= 0)
+        return true;
+    value = (float) ammos / (float) maxAmmos;
+    return false;
 }

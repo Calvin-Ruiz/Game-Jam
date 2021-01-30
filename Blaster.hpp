@@ -25,6 +25,7 @@ public:
 private:
     sf::Texture &bulletTexture;
     float speed;
+    int maxAmmos;
     int ammos;
     enum DynamicItem::actionType action;
 };

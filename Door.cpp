@@ -6,7 +6,7 @@
 */
 #include "Door.hpp"
 
-Door::Door(sf::RenderWindow &window, sf::Texture &texture, int health) : Item(window, texture), health(health)
+Door::Door(sf::RenderWindow &window, sf::Texture &texture, int health) : Item(window, texture), maxHealth(health), health(health)
 {}
 
 Door::~Door()
@@ -18,5 +18,6 @@ bool Door::damage()
         // The door is broken !
         return (true);
     }
+    value = (float) health / (float) maxHealth;
     return (false);
 }

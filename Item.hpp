@@ -12,6 +12,7 @@
 #include <string>
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
+#include "SFML/Graphics/VertexArray.hpp"
 
 namespace sf {
     class RenderWindow;
@@ -39,6 +40,9 @@ protected:
     bool isOnLand = false;
     //! attached value in percent
     float value = 0;
+private:
+    sf::VertexArray buffer;
+    float lastValue = 0;
 };
 
 #endif /* ITEM_HPP_ */

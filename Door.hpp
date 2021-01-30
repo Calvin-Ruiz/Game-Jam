@@ -19,6 +19,7 @@ public:
 
     bool damage();
 private:
+    int maxHealth;
     int health;
 };
 

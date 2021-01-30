@@ -6,7 +6,7 @@
 */
 #include "WindowManager.hpp"
 
-WindowManager::WindowManager()
+WindowManager::WindowManager(sf::RenderWindow &window) : window(window)
 {}
 
 WindowManager::~WindowManager()

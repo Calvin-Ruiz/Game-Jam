@@ -13,7 +13,7 @@
 
 class WindowManager : public ThreadedModule {
 public:
-    WindowManager();
+    WindowManager(sf::RenderWindow &window);
     virtual ~WindowManager();
     WindowManager(const WindowManager &cpy) = default;
     WindowManager &operator=(const WindowManager &src) = default;
@@ -27,6 +27,7 @@ public:
     //! Manage pause menu
     virtual void onPause() override;
 private:
+    sf::RenderWindow &window;
     sf::Texture menuStartBackgroundT;
     sf::Sprite menuStartBackgroundS;
     sf::Texture menuButtonPlayT;

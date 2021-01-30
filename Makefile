@@ -14,7 +14,7 @@ SRC = Items/Blaster.cpp \
 	  Items/TheExit.cpp \
       ThreadedModule.cpp \
 	  Door.cpp \
-      Room.cpp
+      Room.cpp \
 	  WindowManager.cpp \
 	  Items/MediKit.cpp \
 	  Items/ItemMgr.cpp \

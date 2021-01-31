@@ -85,6 +85,7 @@ void Player::useItem(int idx)
 
 bool Player::update()
 {
+    gPlayer->update();
     if (pos && pos->hasCreeper) {
         gPlayer->setHealth((float) --health / (float) maxHealth);
     }
@@ -93,6 +94,7 @@ bool Player::update()
 
 void Player::draw()
 {
+    gPlayer->render();
     for (auto item : inventory) {
         if (item)
             item->drawInInventory();

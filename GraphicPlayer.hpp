@@ -28,7 +28,7 @@ public:
     // call on each tick
     void update();
 
-    void render();
+    void render() {} // Temporary
 
     // define or redefine position
     void setPosition(int x, int y);

@@ -27,7 +27,7 @@ public:
         TOP,
         BOTTOM
     };
-    DynamicItem(sf::RenderWindow &window, sf::Texture &texture);
+    DynamicItem(sf::RenderWindow &window);
     virtual ~DynamicItem();
     DynamicItem(const DynamicItem &cpy) = default;
     DynamicItem &operator=(const DynamicItem &src) = default;
@@ -40,6 +40,7 @@ protected:
     enum actionType action;
     int x, y;
     float vel_x, vel_y;
+    static sf::Texture tex;
 };
 
 #endif /* DYNAMICITEM_HPP_ */

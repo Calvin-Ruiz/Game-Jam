@@ -50,6 +50,8 @@ public:
     void setRoomSize(int offsetX, int offsetY, int width, int height) {x = offsetX; y = offsetY; roomWidth = width; roomHeight = height;}
     inline int getRoomWidth() {return roomWidth;}
     inline int getRoomHeight() {return roomHeight;}
+    int initX, initY;
+    bool isPaused() {return isPaused;}
 private:
     bool isAlive = false;
     bool isPaused = false;

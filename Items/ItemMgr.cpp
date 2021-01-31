@@ -13,6 +13,8 @@
 #include "MediKit.hpp"
 #include "Item.hpp"
 #include "Room.hpp"
+#include "TheExit.hpp"
+#include "DynamicItem.hpp"
 
 ItemMgr::ItemMgr(sf::RenderWindow &window) : window(window)
 {}
@@ -55,6 +57,9 @@ Item *ItemMgr::create(enum itemType itm)
         case MEDIKIT:
             item = std::make_shared<MediKit>(window, itemData[itm].tex);
             break;
+        case EXIT:
+            item = std::make_shared<TheExit>(window, itemData[itm].tex);
+            break;
         default:
             break;
     }
@@ -64,6 +69,9 @@ Item *ItemMgr::create(enum itemType itm)
 
 void ItemMgr::setLoot()
 {
+    auto &dyna = Core::core->getDynamicItemList();
+    while (dyna.size() < 16)
+        dyna.push_back(std::make_shared<DynamicItem>(window));
     auto &rooms = Core::core->rooms;
     //auto &list = Core::core->getItemList();
     std::random_device rdevice;

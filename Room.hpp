@@ -17,6 +17,7 @@ struct room
 {
     bool hasCreeper;
     bool hasChanged;
+    bool hasWallChanged = false;
     bool isBlocking; // Is it blocking for creeper
     bool left;
     bool right;

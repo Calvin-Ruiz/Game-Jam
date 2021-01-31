@@ -29,7 +29,8 @@ public:
         KEY = 3,
         MEDIKIT = 4,
         BULLET = 5,
-        ROCKET = 6
+        ROCKET = 6,
+        EXIT = 7
     };
     ItemMgr(sf::RenderWindow &window);
     virtual ~ItemMgr();
@@ -48,7 +49,7 @@ private:
         float value;
     };
     sf::RenderWindow &window;
-    std::array<imgData, 7> itemData;
+    std::array<imgData, 8> itemData;
     std::vector<enum itemType> freq;
 };
 

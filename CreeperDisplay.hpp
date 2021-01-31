@@ -14,10 +14,12 @@
 #include <vector>
 #include <SFML/Graphics/VertexBuffer.hpp>
 #include "ThreadedModule.hpp"
+#include <SFML/Graphics/Texture.hpp>
 class room;
 
 namespace sf {
     class RenderWindow;
+    class RenderStates;
 }
 
 class CreeperDisplay : public ThreadedModule {
@@ -32,8 +34,11 @@ public:
     // Better if called in a dedicated thread
     virtual void update() override;
     void draw();
+    static CreeperDisplay *instance;
 private:
     sf::RenderWindow &window;
+    std::vector<sf::Texture> textures;
+    std::vector<sf::RenderStates> states;
     std::vector<std::vector<room>> &rooms;
     std::vector<sf::VertexBuffer> buffers;
     std::vector<std::vector<sf::Vertex>> bufferContent;
@@ -42,6 +47,7 @@ private:
     int y = 0;
     int height = 0;
     int width = 0;
+    int time = 0;
 };
 
 #endif /* CREEPERDISPLAY_HPP_ */

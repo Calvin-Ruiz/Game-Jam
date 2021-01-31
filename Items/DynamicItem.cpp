@@ -9,9 +9,13 @@
 #include "CreeperWalk.hpp"
 #include "Room.hpp"
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
-DynamicItem::DynamicItem(sf::RenderWindow &window, sf::Texture &texture) : Item(window, texture)
-{}
+sf::Texture DynamicItem::tex;
+
+DynamicItem::DynamicItem(sf::RenderWindow &window) : Item(window, tex)
+{
+}
 
 DynamicItem::~DynamicItem()
 {}
@@ -62,18 +66,26 @@ void DynamicItem::reaction(int _x, int _y, orientation dir)
                 case LEFT:
                     Core::core->rooms[_x][_y].left = true;
                     Core::core->rooms[_x - 1][_y].right = true;
+                    Core::core->rooms[_x][_y].hasWallChanged = true;
+                    Core::core->rooms[_x - 1][_y].hasWallChanged = true;
                     break;
                 case RIGHT:
                     Core::core->rooms[_x][_y].right = true;
                     Core::core->rooms[_x + 1][_y].left = true;
+                    Core::core->rooms[_x][_y].hasWallChanged = true;
+                    Core::core->rooms[_x + 1][_y].hasWallChanged = true;
                     break;
                 case TOP:
                     Core::core->rooms[_x][_y].top = true;
                     Core::core->rooms[_x][_y - 1].bottom = true;
+                    Core::core->rooms[_x][_y].hasWallChanged = true;
+                    Core::core->rooms[_x][_y - 1].hasWallChanged = true;
                     break;
                 case BOTTOM:
                     Core::core->rooms[_x][_y].bottom = true;
                     Core::core->rooms[_x][_y + 1].top = true;
+                    Core::core->rooms[_x][_y].hasWallChanged = true;
+                    Core::core->rooms[_x][_y + 1].hasWallChanged = true;
                     break;
                 default:
                     break;

@@ -6,14 +6,22 @@
 */
 #include "WindowManager.hpp"
 #include "Core.hpp"
+#include "CreeperDisplay.hpp"
+#include "Item.hpp"
+#include "DynamicItem.hpp"
+#include <vector>
+#include "Room.hpp"
 
-WindowManager::WindowManager(sf::RenderWindow &window) : window(window)
+WindowManager::WindowManager(sf::RenderWindow &window) : window(window), buffer(sf::PrimitiveType::TriangleStrip, sf::VertexBuffer::Static)
 {
     this->player = nullptr;
 }
 
 WindowManager::~WindowManager()
-{}
+{
+    delete player;
+    delete ground;
+}
 
 void WindowManager::initialize()
 {
@@ -40,11 +48,37 @@ void WindowManager::initialize()
     this->player = new Player(new GraphicPlayer());
 
     this->ready = true;
+    disp = std::make_unique<WallDisplay>(window, Core::core->rooms);
+    ground = new sf::Texture();
+    ground->loadFromFile("textures/floor.png");
+    ground->setRepeated(true);
+    float x = Core::core->getRoomWidth() * Core::core->rooms.size();
+    float y = Core::core->getRoomHeight() * Core::core->rooms[0].size();
+    sf::Vertex v[4] = {{{0, 0}, {0, 0}}, {{0, y}, {0, (float) Core::core->rooms[0].size()}}, {{x, 0}, {(float) Core::core->rooms.size(), 0}}, {{x, y}, {(float) Core::core->rooms.size(), (float) Core::core->rooms[0].size()}}};
+    buffer.create(4);
+    buffer.update(v);
+    gstate = std::make_unique<sf::RenderStates>(ground);
+    player->setPosition(Core::core->initX, Core::core->initY);
 }
 
 void WindowManager::refresh()
 {
     window.clear();
+    window.draw(buffer, *gstate);
+    CreeperDisplay::instance->draw();
+    for (auto &item : Core::core->getDynamicItemList()) {
+        item->draw();
+    }
+    Item *ptr;
+    for (int _x = x; _x < width; ++_x) {
+        for (int _y = y; _y < height; ++_y) {
+            ptr = Core::core->rooms[_x][_y].item;
+            if (ptr)
+                ptr->draw();
+        }
+    }
+    disp->draw();
+
     window.display();
 }
 

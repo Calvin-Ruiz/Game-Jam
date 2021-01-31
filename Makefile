@@ -18,12 +18,13 @@ SRC = Items/Blaster.cpp \
 	  Items/MediKit.cpp \
 	  Items/ItemMgr.cpp \
 	  CreeperDisplay.cpp \
+	  WallDisplay.cpp \
 
 NAME = laby
 
 OBJ = $(SRC:.cpp=.o)
 
-CPPFLAGS = -Wall -Wextra -I . -I Items
+CPPFLAGS = -Wall -Wextra -I . -I Items -g3 -Wno-sign-compare
 CC = g++
 BINFLAGS = -lpthread -lsfml-system -lsfml-window -lsfml-graphics
 

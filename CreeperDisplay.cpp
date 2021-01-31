@@ -27,7 +27,7 @@ CreeperDisplay::CreeperDisplay(sf::RenderWindow &window, std::vector<std::vector
             bc[j + 5].texCoords.x = bc[j + 2].texCoords.x = bc[j + 4].texCoords.x = 256;
             bc[j + 5].texCoords.y = bc[j + 1].texCoords.y = bc[j + 3].texCoords.y = 256;
         }
-        buffers.back().create(bufferContent.size() * 6);
+        buffers.back().create(bufferContent.size());
         buffers.back().update(bufferContent[i].data());
     }
     textures.resize(4);

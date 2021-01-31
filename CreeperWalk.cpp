@@ -56,6 +56,7 @@ void CreeperWalk::update()
         mtx.unlock();
         return;
     }
+    std::cout << "CREEPER\n";
     newCreepers.clear();
     creeperify(spawnX, spawnY);
     for (position &value : creepers) {

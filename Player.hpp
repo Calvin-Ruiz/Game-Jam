@@ -42,7 +42,7 @@ private:
     GraphicPlayer::orientation dir = GraphicPlayer::TOP;
     room *pos = nullptr;
     std::unique_ptr<GraphicPlayer> gPlayer;
-    std::array<Item *, 10> inventory;
+    std::array<Item *, 10> inventory{};
     const int maxHealth = 100;
     int x, y, health;
 };

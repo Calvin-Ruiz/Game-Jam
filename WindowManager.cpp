@@ -67,6 +67,8 @@ void WindowManager::refresh()
     window.clear();
     window.draw(buffer, *gstate);
     CreeperDisplay::instance->draw();
+    player->update();
+    player->draw();
     for (auto &item : Core::core->getDynamicItemList()) {
         item->draw();
     }

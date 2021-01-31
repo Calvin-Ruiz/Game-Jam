@@ -81,7 +81,6 @@ void WindowManager::refresh()
     if (y >= Core::core->rooms[0].size() - 4*3) y = Core::core->rooms[0].size() - 4*3 - 1;
     CreeperDisplay::instance->setOrigin(x, y);
     disp->setOrigin(x, y);
-    std::cout << x << ":" << y << std::endl;
     window.setView(v2);
     window.clear();
     window.draw(buffer, *gstate);

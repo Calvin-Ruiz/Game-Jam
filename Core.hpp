@@ -51,7 +51,7 @@ public:
     inline int getRoomWidth() {return roomWidth;}
     inline int getRoomHeight() {return roomHeight;}
     int initX, initY;
-    bool isPaused() {return isPaused;}
+    bool paused() {return isPaused;}
 private:
     bool isAlive = false;
     bool isPaused = false;

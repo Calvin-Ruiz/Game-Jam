@@ -78,8 +78,8 @@ void WindowManager::refresh()
         }
     }
     disp->draw();
-
-    window.display();
+    if (!Core::core->paused())
+        window.display();
 }
 
 void WindowManager::update()

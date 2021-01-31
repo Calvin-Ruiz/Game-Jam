@@ -102,20 +102,20 @@ void showLaby(std::vector<std::vector<room>> rooms)
     int y = 1;
     int x = 1;
     for (std::vector<room> r : rooms) {
-        x = 1;
+        y = 1;
         for (room room : r) {
             // std::cout << "y = " << y << " x = " << x << " " << room.left << std::endl;
 
-            laby[y][x] = ' ';
-            if (room.top) laby[y - 1][x] = ' ';
-            if (room.bottom) laby[y + 1][x] = ' ';
-            if (room.left) laby[y][x - 1] = ' ';
-            if (room.right) laby[y][x + 1] = ' ';
-            if (room.exit == EXIT) laby[y][x] = 'E';
-            if (room.exit == ENTER) laby[y][x] = 'O';
-            x += 2;
+            laby[x][y] = ' ';
+            if (room.top) laby[x - 1][y] = ' ';
+            if (room.bottom) laby[x + 1][y] = ' ';
+            if (room.left) laby[x][y - 1] = ' ';
+            if (room.right) laby[x][y + 1] = ' ';
+            if (room.exit == EXIT) laby[x][y] = 'E';
+            if (room.exit == ENTER) laby[x][y] = 'O';
+            y += 2;
         }
-        y += 2;
+        x += 2;
     }
 
     for (std::string r : laby)

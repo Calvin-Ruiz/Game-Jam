@@ -17,6 +17,7 @@ WallDisplay::WallDisplay(sf::RenderWindow &window, std::vector<std::vector<room>
         for (int j = 0; j < rooms[0].size(); ++j) {
             auto &r = rooms[i][j];
             const int j6 = j * 6;
+            std::cout << r.top << r.right << r.bottom << r.left << std::endl;
             bc[j6].position.x = bc[j6 + 1].position.x = bc[j6 + 3].position.x = 256 * i;
             bc[j6].position.y = bc[j6 + 2].position.y = bc[j6 + 4].position.y = 256 * j;
             bc[j6 + 5].position.x = bc[j6 + 2].position.x = bc[j6 + 4].position.x = 256 + bc[j6].position.x;

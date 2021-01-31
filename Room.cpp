@@ -34,10 +34,10 @@ bool canGoHere(int x, int y, std::vector<std::vector<room>> rooms)
 int getLengthWay(int x, int y, room myRoom, std::vector<std::vector<room>> rooms)
 {
     int res = 0;
-    if (!myRoom.top && canGoHere(x - 1, y, rooms)) res++;
-    if (!myRoom.bottom && canGoHere(x + 1, y, rooms)) res++;
-    if (!myRoom.left && canGoHere(x, y - 1, rooms)) res++;
-    if (!myRoom.right && canGoHere(x, y + 1, rooms)) res++;
+    if (!myRoom.top && canGoHere(x, y - 1, rooms)) res++;
+    if (!myRoom.bottom && canGoHere(x, y + 1, rooms)) res++;
+    if (!myRoom.left && canGoHere(x - 1, y, rooms)) res++;
+    if (!myRoom.right && canGoHere(x + 1, y, rooms)) res++;
     return res;
 }
 
@@ -51,37 +51,37 @@ bool findPath(int &x, int &y, std::vector<std::vector<room>> &rooms, std::list<r
 
     int ran = rand.randInt(0, len - 1);
 
-    if (!myRoom->top && canGoHere(x - 1, y, rooms)) {
+    if (!myRoom->top && canGoHere(x, y - 1, rooms)) {
         if (ran == 0) {
             rooms[x][y].top = true;
-            x--;
+            y--;
             rooms[x][y].bottom = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->bottom && canGoHere(x + 1, y, rooms)) {
+    } if (!myRoom->bottom && canGoHere(x, y + 1, rooms)) {
         if (ran == 0) {
             rooms[x][y].bottom = true;
-            x++;
+            y++;
             rooms[x][y].top = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->right && canGoHere(x, y + 1, rooms)) {
+    } if (!myRoom->right && canGoHere(x + 1, y, rooms)) {
         if (ran == 0) {
             rooms[x][y].right = true;
-            y++;
+            x++;
             rooms[x][y].left = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->left && canGoHere(x, y - 1, rooms))
+    } if (!myRoom->left && canGoHere(x - 1, y, rooms))
         if (ran == 0) {
             rooms[x][y].left = true;
-            y--;
+            x--;
             rooms[x][y].right = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
@@ -104,13 +104,11 @@ void showLaby(std::vector<std::vector<room>> rooms)
     for (std::vector<room> r : rooms) {
         y = 1;
         for (room room : r) {
-            // std::cout << "y = " << y << " x = " << x << " " << room.left << std::endl;
-
             laby[x][y] = ' ';
-            if (room.top) laby[x - 1][y] = ' ';
-            if (room.bottom) laby[x + 1][y] = ' ';
-            if (room.left) laby[x][y - 1] = ' ';
-            if (room.right) laby[x][y + 1] = ' ';
+            if (room.top) laby[x][y - 1] = ' ';
+            if (room.bottom) laby[x][y + 1] = ' ';
+            if (room.left) laby[x - 1][y] = ' ';
+            if (room.right) laby[x + 1][y] = ' ';
             if (room.exit == EXIT) laby[x][y] = 'E';
             if (room.exit == ENTER) laby[x][y] = 'O';
             y += 2;
@@ -142,10 +140,10 @@ void createLaby(int seed, int width, int height, std::vector<std::vector<room>> 
     items.clear();
 
     /* Resize my room */
-    rooms.resize(height);
+    rooms.resize(width);
     for (std::vector<room> &line : rooms)
-        line.resize(width);
-    items.resize(height);
+        line.resize(height);
+    items.resize(width);
 
     /* Init Random And Seed */
     RandomDevice rand(seed);
@@ -162,11 +160,11 @@ void createLaby(int seed, int width, int height, std::vector<std::vector<room>> 
         else listRoom.pop_front();
     }
 
-    // rooms[rand.randInt(0, height - 1)][0].exit = Exit::ENTER;
-    // rooms[rand.randInt(0, height - 1)][width - 1].exit = Exit::EXIT;
+    // rooms[rand.randInt(0, width - 1)][0].exit = Exit::ENTER;
+    // rooms[rand.randInt(0, width - 1)][height - 1].exit = Exit::EXIT;
 
     rooms[0][0].exit = Exit::ENTER;
-    rooms[height - 1][width - 1].exit = Exit::EXIT;
+    rooms[width - 1][height - 1].exit = Exit::EXIT;
 
-    showLaby(rooms);
+    // showLaby(rooms);
 }

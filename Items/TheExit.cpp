@@ -6,7 +6,7 @@
 */
 #include "TheExit.hpp"
 
-TheExit::TheExit(sf::RenderWindow &window, sf::Texture &texture) : Item(window, texture)
+TheExit::TheExit(sf::RenderWindow &window, sf::Texture &texture) : Item(window, texture, 1)
 {}
 
 TheExit::~TheExit()

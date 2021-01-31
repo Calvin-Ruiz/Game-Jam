@@ -63,7 +63,7 @@ void CreeperDisplay::update()
                     = sf::Vector2f(0, 0);
                 }
                 rooms[x][y].hasChanged = false;
-                b.update(bc.data() + y * 6, y, 6);
+                b.update(bc.data() + y * 6, y * 6, 6);
             }
         }
     }

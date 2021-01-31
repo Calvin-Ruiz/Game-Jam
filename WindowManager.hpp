@@ -54,6 +54,7 @@ private:
     int y = 0;
     int width = 4*4+1;
     int height = 4*3+1;
+    sf::VertexBuffer band;
 };
 
 #endif /* WINDOW_MANAGER_HPP_ */

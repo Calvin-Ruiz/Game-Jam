@@ -59,8 +59,8 @@ void WindowManager::initialize()
     buffer.update(v);
     gstate = std::make_unique<sf::RenderStates>(ground);
     player->setPosition(Core::core->initX, Core::core->initY);
-    CreeperDisplay::instance->setDimension(4*4+1, 4*3+1);
-    disp->setDimension(4*4+1, 4*3+1);
+    CreeperDisplay::instance->setDimension(4*3+1, 4*4+1);
+    disp->setDimension(4*3+1, 4*4+1);
 }
 
 void WindowManager::refresh()
@@ -158,23 +158,23 @@ void WindowManager::onPause()
         }
 
     }
-    
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
-        localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 && 
-        localPosition.x >= this->menuButtonLeaveS.getPosition().x && 
-        localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 && 
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+        localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 &&
+        localPosition.x >= this->menuButtonLeaveS.getPosition().x &&
+        localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 &&
         localPosition.y >= this->menuButtonLeaveS.getPosition().y) {
         exit(0);
-    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
-        localPosition.x <= this->menuButtonResumeS.getPosition().x + 180 && 
-        localPosition.x >= this->menuButtonResumeS.getPosition().x && 
-        localPosition.y <= this->menuButtonResumeS.getPosition().y + 130 && 
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+        localPosition.x <= this->menuButtonResumeS.getPosition().x + 180 &&
+        localPosition.x >= this->menuButtonResumeS.getPosition().x &&
+        localPosition.y <= this->menuButtonResumeS.getPosition().y + 130 &&
         localPosition.y >= this->menuButtonResumeS.getPosition().y) {
         Core::core->setPause(false);
-    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
-        localPosition.x <= this->menuButtonRetryS.getPosition().x + 180 && 
-        localPosition.x >= this->menuButtonRetryS.getPosition().x && 
-        localPosition.y <= this->menuButtonRetryS.getPosition().y + 130 && 
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+        localPosition.x <= this->menuButtonRetryS.getPosition().x + 180 &&
+        localPosition.x >= this->menuButtonRetryS.getPosition().x &&
+        localPosition.y <= this->menuButtonRetryS.getPosition().y + 130 &&
         localPosition.y >= this->menuButtonRetryS.getPosition().y) {
         std::cout << "clic retry | doit relancer le niveau" << std::endl;
     }

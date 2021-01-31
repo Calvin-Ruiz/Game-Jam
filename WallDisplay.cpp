@@ -21,10 +21,10 @@ WallDisplay::WallDisplay(sf::RenderWindow &window, std::vector<std::vector<room>
             bc[j6].position.y = bc[j6 + 2].position.y = bc[j6 + 4].position.y = 256 * j;
             bc[j6 + 5].position.x = bc[j6 + 2].position.x = bc[j6 + 4].position.x = 256 + bc[j6].position.x;
             bc[j6 + 5].position.y = bc[j6 + 1].position.y = bc[j6 + 3].position.y = 256 + bc[j6].position.y;
-            bc[j6].texCoords.x = bc[j6 + 1].texCoords.x = bc[j6 + 3].texCoords.x = 0.25 * !r.left + 0.5 * !r.right;
-            bc[j6].texCoords.y = bc[j6 + 2].texCoords.y = bc[j6 + 4].texCoords.y = 0.25 * !r.top + 0.5 * !r.bottom;
-            bc[j6 + 5].texCoords.x = bc[j6 + 2].texCoords.x = bc[j6 + 4].texCoords.x = 0.25 + bc[j6].texCoords.x;
-            bc[j6 + 5].texCoords.y = bc[j6 + 1].texCoords.y = bc[j6 + 3].texCoords.y = 0.25 + bc[j6].texCoords.y;
+            bc[j6].texCoords.x = bc[j6 + 1].texCoords.x = bc[j6 + 3].texCoords.x = 256 * !r.left + 512 * !r.right;
+            bc[j6].texCoords.y = bc[j6 + 2].texCoords.y = bc[j6 + 4].texCoords.y = 256 * !r.top + 512 * !r.bottom;
+            bc[j6 + 5].texCoords.x = bc[j6 + 2].texCoords.x = bc[j6 + 4].texCoords.x = 256 + bc[j6].texCoords.x;
+            bc[j6 + 5].texCoords.y = bc[j6 + 1].texCoords.y = bc[j6 + 3].texCoords.y = 256 + bc[j6].texCoords.y;
         }
         buffers.back().create(bufferContent.size());
         buffers.back().update(bufferContent[i].data());

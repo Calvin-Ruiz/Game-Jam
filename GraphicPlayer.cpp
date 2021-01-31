@@ -25,56 +25,28 @@ GraphicPlayer::~GraphicPlayer()
 
 void GraphicPlayer::update()
 {
+    if (!moving)
+        return;
 
-        switch (this->dir) {
-            case orientation::LEFT:
-
-                if (this->animate_x >= 1.0f)
-                    return;
-
-                this->animate_x += this->speed;
-                break;
-            case orientation::RIGHT:
-
-                if (this->animate_x <= -1.0f)
-                    return;
-
-                this->animate_x -= this->speed;
-                break;
-            case orientation::TOP:
-
-                if (this->animate_y <= -1.0f)
-                    return;
-
-                this->animate_y -= this->speed;
-                break;
-            case orientation::BOTTOM:
-
-                if (this->animate_y >= 1.0f)
-                    return;
-
-                this->animate_y += this->speed;
-                break;
-        }
-
-    if (this->animate_x >= 1.0f) {
-        this->animate_x = 0.0f;
-        this->x++;
+    switch (this->dir) {
+        case orientation::LEFT:
+            rx = x * 256 + (256 * (1.f - ((float) ++time) / fullTime));
+            break;
+        case orientation::RIGHT:
+            rx = x * 256 - (256 * (1.f - ((float) ++time) / fullTime));
+            break;
+        case orientation::TOP:
+            ry = y * 256 + (256 * (1.f - ((float) ++time) / fullTime));
+            break;
+        case orientation::BOTTOM:
+            ry = y * 256 - (256 * (1.f - ((float) ++time) / fullTime));
+            break;
     }
-
-    if (this->animate_x <= -1.0f) {
-        this->animate_x = 0.0f;
-        this->x--;
-    }
-
-    if (this->animate_y >= 1.0f) {
-        this->animate_y = 0.0f;
-        this->y++;
-    }
-
-    if (this->animate_y <= -1.0f) {
-        this->animate_y = 0.0f;
-        this->y--;
+    if (time == fullTime) {
+        time = 0;
+        moving = false;
+        rx = x * 256;
+        ry = y * 256;
     }
 }
 
@@ -93,29 +65,36 @@ void GraphicPlayer::setPosition(int x, int y)
 {
     this->x = x;
     this->y = y;
-
-    this->animate_x = 0.0f;
-    this->animate_y = 0.0f;
+    rx = x * 256;
+    ry = y * 256;
 }
 
 // inform left movement
 void GraphicPlayer::left() {
     this->setDirection(orientation::LEFT);
+    --x;
+    moving = true;
 }
 
 // inform right movement
 void GraphicPlayer::right() {
     this->setDirection(orientation::RIGHT);
+    ++x;
+    moving = true;
 }
 
 // inform top movement
 void GraphicPlayer::top() {
     this->setDirection(orientation::TOP);
+    --y;
+    moving = true;
 }
 
 // inform bottom movement
 void GraphicPlayer::bottom() {
     this->setDirection(orientation::BOTTOM);
+    ++y;
+    moving = true;
 }
 
 // (from 0 to 1, 1 is 100% and 0 is 0%)

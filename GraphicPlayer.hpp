@@ -37,8 +37,8 @@ public:
     void setPosition(int x, int y);
     // return coordinates
     void getCoords(int &x, int &y) {
-        x = (this->x + animate_x) * 256;
-        y = (this->y + animate_y) * 256;
+        x = rx;
+        y = ry;
     }
 
     // inform left movement
@@ -57,11 +57,14 @@ private:
     float speed; // deplacement distance on each tick
     int x; // case x
     int y; // case y
+    int rx;
+    int ry;
     float animate_x; // animation x, 0 = start, abs(1) = end
     float animate_y; // animation y, 0 = start, abs(1) = end
-    const float fullTime = 10;
-    const float phaseCount = 5;
-    float time = 0;
+    const int fullTime = 10;
+    const int phaseCount = 5;
+    int time = 0;
+    bool moving = false;
     float health;
     orientation dir;
     sf::RenderWindow &window;

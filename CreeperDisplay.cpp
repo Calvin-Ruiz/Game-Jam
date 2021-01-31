@@ -72,7 +72,7 @@ void CreeperDisplay::update()
 void CreeperDisplay::draw()
 {
     for (int i = x; i < this->x + width; ++i) {
-        window.draw(buffers[x], y * 6, height * 6, states[time / 5]);
+        window.draw(buffers[i], y * 6, height * 6, states[time / 5]);
     }
     if (++time >= 20) time = 0;
 }

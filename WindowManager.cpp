@@ -41,7 +41,7 @@ void WindowManager::initialize()
     this->menuButtonRetryS.setTexture(this->menuButtonRetryT);
     this->menuButtonRetryS.setScale(0.5, 0.5);
 
-    this->player = new Player(new GraphicPlayer());
+    this->player = new Player(new GraphicPlayer(window));
 
     this->ready = true;
     disp = std::make_unique<WallDisplay>(window, Core::core->rooms);

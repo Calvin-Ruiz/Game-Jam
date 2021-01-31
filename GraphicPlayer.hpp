@@ -11,6 +11,9 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class GraphicPlayer {
 public:
@@ -20,7 +23,7 @@ public:
         TOP,
         BOTTOM
     };
-    GraphicPlayer();
+    GraphicPlayer(sf::RenderWindow &window);
     virtual ~GraphicPlayer();
     GraphicPlayer(const GraphicPlayer &cpy) = delete;
     GraphicPlayer &operator=(const GraphicPlayer &src) = delete;
@@ -28,7 +31,7 @@ public:
     // call on each tick
     void update();
 
-    void render() {} // Temporary
+    void render(); // Temporary
 
     // define or redefine position
     void setPosition(int x, int y);
@@ -56,8 +59,15 @@ private:
     int y; // case y
     float animate_x; // animation x, 0 = start, abs(1) = end
     float animate_y; // animation y, 0 = start, abs(1) = end
+    const float fullTime = 10;
+    const float phaseCount = 5;
+    float time = 0;
     float health;
     orientation dir;
+    sf::RenderWindow &window;
+    sf::IntRect rect;
+    sf::Texture tex;
+    sf::Sprite sprite;
 };
 
 #endif /* GRAPHICPLAYER_HPP_ */

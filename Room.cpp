@@ -160,11 +160,11 @@ void createLaby(int seed, int width, int height, std::vector<std::vector<room>> 
         else listRoom.pop_front();
     }
 
-    // rooms[rand.randInt(0, width - 1)][0].exit = Exit::ENTER;
-    // rooms[rand.randInt(0, width - 1)][height - 1].exit = Exit::EXIT;
+    rooms[rand.randInt(0, width - 1)][0].exit = Exit::ENTER;
+    rooms[rand.randInt(0, width - 1)][height - 1].exit = Exit::EXIT;
 
-    rooms[0][0].exit = Exit::ENTER;
-    rooms[width - 1][height - 1].exit = Exit::EXIT;
+    // rooms[0][0].exit = Exit::ENTER;
+    // rooms[width - 1][height - 1].exit = Exit::EXIT;
 
     // showLaby(rooms);
 }

@@ -24,11 +24,12 @@ void DynamicItem::redefine(sf::Texture &texture, int _x, int _y, float _vel_x, f
 {
     sprite.setTexture(texture, true);
     auto tmp = sprite.getTextureRect();
-    _x -= tmp.width / 2;
-    _y -= tmp.height / 2;
-    sprite.setPosition(x, y);
+    sprite.scale(0.5, 0.5);
+    _x -= tmp.height / 4;
+    _y -= tmp.height / 4;
     x = _x;
     y = _y;
+    sprite.setPosition(x, y);
     vel_x = _vel_x;
     vel_y = _vel_y;
     action = _action;

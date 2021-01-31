@@ -19,6 +19,8 @@
 
 #define COEF 1.f
 
+void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit);
+
 int main(/*int argc, char const *argv[]*/)
 {
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Amoeba Dungeon", sf::Style::Default);
@@ -31,8 +33,8 @@ int main(/*int argc, char const *argv[]*/)
     imgr.setItemData(ItemMgr::DOOR, "door.png", COEF * 0.5, 32);
     imgr.setItemData(ItemMgr::KEY, "key.png", -1);
     imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", COEF * 0.2);
-    imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 0.1f);
-    imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 0.15f);
+    imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 25);
+    imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 15);
     imgr.setItemData(ItemMgr::EXIT, "exit.png", 0);
 
     while (window.isOpen()) {
@@ -46,15 +48,16 @@ int main(/*int argc, char const *argv[]*/)
         Core core;
         core.setRoomSize(0, 0, 256, 256);
         int x = 5, y = 5; // must be replaced by the entry location
+        createLaby(core.getSeed(), width, height, core.rooms, core.getItemList());
+        findExit(x, y, Core::core->rooms, ENTER);
         core.initX = x;
         core.initY = y;
-        createLaby(core.getSeed(), width, height, core.rooms, core.getItemList());
         imgr.setLoot();
 
         // Build everything here
         auto cd = new CreeperDisplay(window, core.rooms);
         auto cw = new CreeperWalk(core.rooms);
-        cw->reset(150, 25, x, y); // 30 seconds before creeper comes, then 5 seconds per step
+        cw->reset(50, 15, x, y); // 10 seconds before creeper comes, then 3 seconds per step
         core.startMainloop(30, cd);
         core.startMainloop(5, cw);
         core.startMainloop(20, new GlobalActivity());

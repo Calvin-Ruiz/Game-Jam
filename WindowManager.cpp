@@ -25,7 +25,6 @@ WindowManager::~WindowManager()
 
 void WindowManager::initialize()
 {
-    this->rectangle.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     this->rectangle.setFillColor(sf::Color(169,169,169, 128));
 
     if (!this->menuButtonResumeT.loadFromFile("Sprite/Resume_button.png"))
@@ -37,13 +36,10 @@ void WindowManager::initialize()
 
     this->menuButtonResumeS.setTexture(this->menuButtonResumeT);
     this->menuButtonResumeS.setScale(0.5, 0.5);
-    this->menuButtonResumeS.setPosition((window.getSize().x / 2) - 360, (window.getSize().y / 2) + 150);
     this->menuButtonLeaveS.setTexture(this->menuButtonLeaveT);
     this->menuButtonLeaveS.setScale(0.5, 0.5);
-    this->menuButtonLeaveS.setPosition((window.getSize().x / 2) + 190, (window.getSize().y / 2) + 150);
     this->menuButtonRetryS.setTexture(this->menuButtonRetryT);
     this->menuButtonRetryS.setScale(0.5, 0.5);
-    this->menuButtonRetryS.setPosition((window.getSize().x / 2) - 80, (window.getSize().y / 2) + 150);
 
     this->player = new Player(new GraphicPlayer());
 
@@ -138,6 +134,10 @@ void WindowManager::onPause()
 
     sf::Event event;
     sf::Vector2i localPosition = sf::Mouse::getPosition(this->window);
+    this->rectangle.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+    this->menuButtonResumeS.setPosition((window.getSize().x / 2) - 360, (window.getSize().y / 2) + 150);
+    this->menuButtonLeaveS.setPosition((window.getSize().x / 2) + 190, (window.getSize().y / 2) + 150);
+    this->menuButtonRetryS.setPosition((window.getSize().x / 2) - 80, (window.getSize().y / 2) + 150);
 
     while (window.pollEvent(event)) {
 
@@ -158,13 +158,16 @@ void WindowManager::onPause()
             default:
                 break;
         }
-
+        if (event.type == sf::Event::Resized) {
+            sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+            window.setView(sf::View(visibleArea));
+        }
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-        localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 &&
-        localPosition.x >= this->menuButtonLeaveS.getPosition().x &&
-        localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 &&
+        localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 && 
+        localPosition.x >= this->menuButtonLeaveS.getPosition().x && 
+        localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 && 
         localPosition.y >= this->menuButtonLeaveS.getPosition().y) {
         exit(0);
     } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&

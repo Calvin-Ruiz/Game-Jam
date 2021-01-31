@@ -67,6 +67,13 @@ void Item::drawInInventory()
     window.draw(buffer);
 }
 
+bool Item::take(int idx)
+{
+    sprite.setPosition(256 * (idx + 2), 2560);
+    isOnLand = false;
+    return true;
+}
+
 bool Item::use(int x, int y)
 {
     return (drop(x, y));

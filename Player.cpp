@@ -78,7 +78,7 @@ void Player::useItem(int idx)
     } else {
         // collect item in the ground
         Item *item = pos->item;
-        if (item && item->take())
+        if (item && item->take(idx))
             inventory[idx] = item;
     }
 }
@@ -94,7 +94,6 @@ bool Player::update()
 
 void Player::draw()
 {
-    gPlayer->render();
     for (auto item : inventory) {
         if (item)
             item->drawInInventory();

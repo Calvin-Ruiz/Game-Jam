@@ -20,7 +20,7 @@ public:
     TheExit(const TheExit &cpy) = default;
     TheExit &operator=(const TheExit &src) = default;
 
-    virtual bool take() override;
+    virtual bool take(int idx) override;
 private:
 };
 

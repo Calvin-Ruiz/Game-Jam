@@ -17,7 +17,7 @@
 
 #include "Room.hpp"
 
-#define COEF 10.f
+#define COEF 1.f
 
 int main(/*int argc, char const *argv[]*/)
 {

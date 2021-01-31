@@ -84,8 +84,6 @@ void WindowManager::refresh()
     window.clear();
     window.draw(buffer, *gstate);
     CreeperDisplay::instance->draw();
-    player->update();
-    player->draw();
     for (auto &item : Core::core->getDynamicItemList()) {
         item->draw();
     }
@@ -97,7 +95,13 @@ void WindowManager::refresh()
                 ptr->draw();
         }
     }
+    player->update();
+    player->get().render();
     disp->draw();
+    v2.setCenter(128*4*4, 128*4*3);
+    window.setView(v2);
+    // draw band (512, 2560) to (512 + 256 * 10, 2560 + 256)
+    player->draw();
     if (!Core::core->paused())
         window.display();
     window.setView(v);

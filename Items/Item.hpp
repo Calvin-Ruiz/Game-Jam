@@ -31,7 +31,7 @@ public:
     virtual void draw();
     virtual void drawInInventory();
     //! take from the ground
-    virtual bool take() {isOnLand = false; return true;}
+    virtual bool take(int idx);
     //! return true when this item must be removed of inventory
     virtual bool use(int x, int y);
 protected:

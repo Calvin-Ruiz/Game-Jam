@@ -12,7 +12,7 @@ TheExit::TheExit(sf::RenderWindow &window, sf::Texture &texture) : Item(window, 
 TheExit::~TheExit()
 {}
 
-bool TheExit::take()
+bool TheExit::take(int)
 {
     return false;
 }

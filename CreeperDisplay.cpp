@@ -53,10 +53,10 @@ void CreeperDisplay::update()
         for (int y = this->y; y < this->y + height; ++y) {
             if (rooms[x][y].hasChanged) {
                 if (rooms[x][y].hasCreeper) {
-                    bc[y * 6].position.x = bc[y * 6 + 1].position.x = bc[y * 6 + 3].position.x = x * Core::core->getRoomWidth();
-                    bc[y * 6].position.y = bc[y * 6 + 2].position.y = bc[y * 6 + 4].position.y = y * Core::core->getRoomHeight();
-                    bc[y * 6 + 5].position.x = bc[y * 6 + 2].position.x = bc[y * 6 + 4].position.x = (x + 1) * Core::core->getRoomWidth();
-                    bc[y * 6 + 5].position.y = bc[y * 6 + 1].position.y = bc[y * 6 + 3].position.y = (y + 1) * Core::core->getRoomHeight();
+                    bc[y * 6].position.x = bc[y * 6 + 1].position.x = bc[y * 6 + 3].position.x = x * 256;
+                    bc[y * 6].position.y = bc[y * 6 + 2].position.y = bc[y * 6 + 4].position.y = y * 256;
+                    bc[y * 6 + 5].position.x = bc[y * 6 + 2].position.x = bc[y * 6 + 4].position.x = bc[y * 6].position.x + 256;
+                    bc[y * 6 + 5].position.y = bc[y * 6 + 1].position.y = bc[y * 6 + 3].position.y = bc[y * 6].position.y + 256;
                 } else {
                     bc[y * 6].position = bc[y * 6 + 1].position = bc[y * 6 + 2].position
                     = bc[y * 6 + 3].position = bc[y * 6 + 4].position = bc[y * 6 + 5].position

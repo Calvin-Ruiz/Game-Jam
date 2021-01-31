@@ -66,5 +66,6 @@ int main(/*int argc, char const *argv[]*/)
         if (core.isCompleted)
             startMenu.setMaxLevel(startMenu.getLevel() + 1);
     }
+    startMenu.destroy();
     return 0;
 }

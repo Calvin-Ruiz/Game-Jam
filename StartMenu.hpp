@@ -9,6 +9,7 @@
 #define STARTMENU_HPP_
 
 #include <iostream>
+#include <fstream>
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -24,6 +25,7 @@ class StartMenu {
         sf::Sprite getMenuButtonExit();
         int getLevel() {return level;}
         void setMaxLevel(int newMaxLevel) {if (newMaxLevel > maxLevel) maxLevel = newMaxLevel;}
+        void destroy();
 
     protected:
     private:
@@ -42,7 +44,7 @@ class StartMenu {
         sf::Text selectLvlText;
         sf::RectangleShape rectangle;
         int level;
-        int maxLevel = 1;
+        int maxLevel;
 };
 
 #endif /* !STARTMENU_HPP_ */

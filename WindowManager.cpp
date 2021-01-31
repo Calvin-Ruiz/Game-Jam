@@ -213,6 +213,7 @@ void WindowManager::onPause()
         localPosition.x >= this->menuButtonLeaveS.getPosition().x &&
         localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 &&
         localPosition.y >= this->menuButtonLeaveS.getPosition().y) {
+        window.close();
         exit(0);
     } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
         localPosition.x <= this->menuButtonResumeS.getPosition().x + 180 &&

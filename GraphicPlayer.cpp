@@ -26,23 +26,36 @@ GraphicPlayer::~GraphicPlayer()
 void GraphicPlayer::update()
 {
 
-    if (this->animate_x == 0 || this->animate_y == 0)
-        return;
+        switch (this->dir) {
+            case orientation::LEFT:
 
-    switch (this->dir) {
-        case orientation::LEFT:
-            this->animate_x += this->speed;
-            break;
-        case orientation::RIGHT:
-            this->animate_x -= this->speed;
-            break;
-        case orientation::TOP:
-            this->animate_y -= this->speed;
-            break;
-        case orientation::BOTTOM:
-            this->animate_y += this->speed;
-            break;
-    }
+                if (this->animate_x >= 1.0f)
+                    return;
+
+                this->animate_x += this->speed;
+                break;
+            case orientation::RIGHT:
+
+                if (this->animate_x <= -1.0f)
+                    return;
+
+                this->animate_x -= this->speed;
+                break;
+            case orientation::TOP:
+
+                if (this->animate_y <= -1.0f)
+                    return;
+
+                this->animate_y -= this->speed;
+                break;
+            case orientation::BOTTOM:
+
+                if (this->animate_y >= 1.0f)
+                    return;
+
+                this->animate_y += this->speed;
+                break;
+        }
 
     if (this->animate_x >= 1.0f) {
         this->animate_x = 0.0f;

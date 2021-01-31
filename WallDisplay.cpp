@@ -26,7 +26,7 @@ WallDisplay::WallDisplay(sf::RenderWindow &window, std::vector<std::vector<room>
             bc[j6 + 5].texCoords.x = bc[j6 + 2].texCoords.x = bc[j6 + 4].texCoords.x = 256 + bc[j6].texCoords.x;
             bc[j6 + 5].texCoords.y = bc[j6 + 1].texCoords.y = bc[j6 + 3].texCoords.y = 256 + bc[j6].texCoords.y;
         }
-        buffers.back().create(bufferContent.size());
+        buffers.back().create(bufferContent[i].size());
         buffers.back().update(bufferContent[i].data());
     }
     tex.loadFromFile("textures/wall.png");

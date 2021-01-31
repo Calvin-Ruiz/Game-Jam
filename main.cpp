@@ -36,8 +36,8 @@ int main(/*int argc, char const *argv[]*/)
     while (window.isOpen()) {
         // main menu
         startMenu.mainloop();
-        int width = startMenu.getLevel() * 10 + 20;
-        int height = startMenu.getLevel() * 10 + 20;
+        int width = startMenu.getLevel() * 10 + 10;
+        int height = startMenu.getLevel() * 10 + 10;
 
         if (!window.isOpen())
             break;
@@ -58,6 +58,8 @@ int main(/*int argc, char const *argv[]*/)
         core.startMainloop(20, new GlobalActivity());
         core.startMainloop(60, new WindowManager(window));
         core.mainloop();
+        if (core.isCompleted)
+            startMenu.setMaxLevel(startMenu.getLevel() + 1);
     }
     return 0;
 }

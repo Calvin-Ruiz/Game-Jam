@@ -23,7 +23,7 @@ class StartMenu {
         sf::Sprite getMenuButtonPlay();
         sf::Sprite getMenuButtonExit();
         int getLevel() {return level;}
-        void setMaxLevel(int newMaxLevel) {maxLevel = newMaxLevel;}
+        void setMaxLevel(int newMaxLevel) {if (newMaxLevel > maxLevel) maxLevel = newMaxLevel;}
 
     protected:
     private:

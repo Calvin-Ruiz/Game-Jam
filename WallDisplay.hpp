@@ -13,6 +13,8 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/VertexBuffer.hpp>
 class room;
 
@@ -31,6 +33,8 @@ private:
     std::vector<std::vector<room>> &rooms;
     std::vector<sf::VertexBuffer> buffers;
     std::vector<std::vector<sf::Vertex>> bufferContent;
+    sf::Texture tex;
+    sf::RenderStates state;
     int x = 0;
     int y = 0;
     int height = 0;

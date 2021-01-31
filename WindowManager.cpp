@@ -74,13 +74,14 @@ void WindowManager::refresh()
     if (y > Core::core->rooms[0].size() * 256 - 128*4*3) y = Core::core->rooms[0].size() * 256 - 128*4*3;
     v2.setCenter(x, y);
     x = (x - 128 * 4 * 4) / 256;
-    y = (x - 128 * 4 * 3) / 256;
+    y = (y - 128 * 4 * 3) / 256;
     if (x < 0) x = 0;
     if (y < 0) y = 0;
     if (x >= Core::core->rooms.size() - 4*4) x = Core::core->rooms.size() - 4*4 - 1;
-    if (y >= Core::core->rooms[0].size() - 4*3) x = Core::core->rooms[0].size() - 4*3 - 1;
+    if (y >= Core::core->rooms[0].size() - 4*3) y = Core::core->rooms[0].size() - 4*3 - 1;
     CreeperDisplay::instance->setOrigin(x, y);
     disp->setOrigin(x, y);
+    std::cout << x << ":" << y << std::endl;
     window.setView(v2);
     window.clear();
     window.draw(buffer, *gstate);

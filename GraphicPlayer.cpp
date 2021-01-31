@@ -74,6 +74,7 @@ void GraphicPlayer::left() {
     this->setDirection(orientation::LEFT);
     --x;
     moving = true;
+    time = 0;
 }
 
 // inform right movement
@@ -81,6 +82,7 @@ void GraphicPlayer::right() {
     this->setDirection(orientation::RIGHT);
     ++x;
     moving = true;
+    time = 0;
 }
 
 // inform top movement
@@ -88,6 +90,7 @@ void GraphicPlayer::top() {
     this->setDirection(orientation::TOP);
     --y;
     moving = true;
+    time = 0;
 }
 
 // inform bottom movement
@@ -95,6 +98,7 @@ void GraphicPlayer::bottom() {
     this->setDirection(orientation::BOTTOM);
     ++y;
     moving = true;
+    time = 0;
 }
 
 // (from 0 to 1, 1 is 100% and 0 is 0%)
@@ -105,6 +109,8 @@ void GraphicPlayer::setHealth(float value) {
 // set orientation
 void GraphicPlayer::setDirection(orientation dir)
 {
+    rx = x * 256;
+    ry = y * 256;
     switch (dir) {
         case BOTTOM:
             sprite.setRotation(0);

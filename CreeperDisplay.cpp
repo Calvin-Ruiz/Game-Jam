@@ -47,10 +47,10 @@ CreeperDisplay::~CreeperDisplay()
 
 void CreeperDisplay::update()
 {
-    for (int x = this->x; x < width; ++x) {
+    for (int x = this->x; x < this->x + width; ++x) {
         auto &b = buffers[x];
         auto &bc = bufferContent[x];
-        for (int y = this->y; y < height; ++y) {
+        for (int y = this->y; y < this->y + height; ++y) {
             if (rooms[x][y].hasChanged) {
                 if (rooms[x][y].hasCreeper) {
                     bc[y * 6].position.x = bc[y * 6 + 1].position.x = bc[y * 6 + 3].position.x = x * Core::core->getRoomWidth();
@@ -71,7 +71,7 @@ void CreeperDisplay::update()
 
 void CreeperDisplay::draw()
 {
-    for (int i = x; i < width; ++i) {
+    for (int i = x; i < this->x + width; ++i) {
         window.draw(buffers[x], y * 6, height * 6, states[time / 5]);
     }
     if (++time >= 20) time = 0;

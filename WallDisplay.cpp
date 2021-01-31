@@ -38,10 +38,10 @@ WallDisplay::~WallDisplay()
 
 void WallDisplay::draw()
 {
-    for (int x = this->x; x < width; ++x) {
+    for (int x = this->x; x < this->x + width; ++x) {
         auto &b = buffers[x];
         auto &bc = bufferContent[x];
-        for (int y = this->y; y < height; ++y) {
+        for (int y = this->y; y < this->y + height; ++y) {
             if (rooms[x][y].hasWallChanged) {
                 bc[y * 6].texCoords.x = bc[y * 6 + 1].texCoords.x = bc[y * 6 + 3].texCoords.x = 256 * !rooms[x][y].left + 512 * !rooms[x][y].right;
                 bc[y * 6].texCoords.y = bc[y * 6 + 2].texCoords.y = bc[y * 6 + 4].texCoords.y = 256 * !rooms[x][y].top + 512 * !rooms[x][y].bottom;
@@ -52,7 +52,7 @@ void WallDisplay::draw()
             }
         }
     }
-    for (int i = x; i < width; ++i) {
+    for (int i = x; i < this->x + width; ++i) {
         window.draw(buffers[i], y * 6, height * 6, state);
     }
 }

@@ -9,7 +9,7 @@
 
 StartMenu::StartMenu(sf::RenderWindow &window, sf::Event &event) : window(window), event(event)
 {
-    if (!this->menuStartBackgroundT.loadFromFile("Sprite/splash.png", sf::IntRect(0, 0, 1980, 1080)))
+    if (!this->menuStartBackgroundT.loadFromFile("Sprite/splash.png", sf::IntRect(0, 0, 800, 600)))
         std::cerr << "menuStartBackground can't load from file" << std::endl;
     if (!this->menuButtonExitT.loadFromFile("Sprite/Exit_button.png"))
         std::cerr << "menuButtonExit can't load from file" << std::endl;
@@ -74,6 +74,8 @@ void StartMenu::selectLvlLoop()
             if (event.type == sf::Event::Resized) {
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
                 window.setView(sf::View(visibleArea));
+                this->menuStartBackgroundS.setScale((float)this->window.getSize().x / (float) this->menuStartBackgroundT.getSize().x,
+                                                    (float)this->window.getSize().y / (float) this->menuStartBackgroundT.getSize().y);
             }
             if (event.type == sf::Event::MouseButtonReleased)
                 if (event.mouseButton.button == sf::Mouse::Left) {
@@ -171,6 +173,8 @@ void StartMenu::mainloop()
             if (event.type == sf::Event::Resized) {
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
                 window.setView(sf::View(visibleArea));
+                this->menuStartBackgroundS.setScale((float)this->window.getSize().x / (float) this->menuStartBackgroundT.getSize().x,
+                                                 (float)this->window.getSize().y / (float) this->menuStartBackgroundT.getSize().y);
             }
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {

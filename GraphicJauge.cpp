@@ -70,10 +70,11 @@ void GraphicJauge::onResize()
 
 void GraphicJauge::update()
 {
-    setValue(player->getHealth());
+    setValue(player.getHealth());
+    onResize();
 }
 
 void GraphicJauge::draw()
 {
-    window->draw(buffer);
+    window.draw(buffer);
 }

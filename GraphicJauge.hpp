@@ -19,15 +19,18 @@ public:
     GraphicJauge(const GraphicJauge &cpy) = default;
     GraphicJauge &operator=(const GraphicJauge &src) = default;
 
+    void onResize();
     void setValue(float value);
     void update();
     void draw();
 private:
     int width = 0;
     int height = 0;
-    sf::VertexArray buffer;
+    int x = 0;
+    int y = 0;
     sf::RenderWindow &window;
     GraphicPlayer &player;
+    sf::VertexArray buffer;
 };
 
 #endif

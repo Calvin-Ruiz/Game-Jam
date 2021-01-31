@@ -55,15 +55,14 @@ void WindowManager::initialize()
     buffer.update(v);
     gstate = std::make_unique<sf::RenderStates>(ground);
     player->setPosition(Core::core->initX, Core::core->initY);
-    CreeperDisplay::instance->setDimension(4*3+1, 4*4+1);
-    disp->setDimension(4*3+1, 4*4+1);
+    CreeperDisplay::instance->setDimension(height, width);
+    disp->setDimension(height, width);
 }
 
 void WindowManager::refresh()
 {
     sf::View v = window.getView();
     sf::View v2(sf::FloatRect(0, 0, 256*4*4, 4*256*3));
-    int x, y;
     player->get().getCoords(x, y);
     x += 128;
     y += 128;
@@ -77,8 +76,8 @@ void WindowManager::refresh()
     y = (y - 128 * 4 * 3) / 256;
     if (x < 0) x = 0;
     if (y < 0) y = 0;
-    if (x >= Core::core->rooms.size() - 4*4) x = Core::core->rooms.size() - 4*4 - 1;
-    if (y >= Core::core->rooms[0].size() - 4*3) y = Core::core->rooms[0].size() - 4*3 - 1;
+    if (x > Core::core->rooms.size() - width) x = Core::core->rooms.size() - width;
+    if (y > Core::core->rooms[0].size() - height) y = Core::core->rooms[0].size() - height;
     CreeperDisplay::instance->setOrigin(x, y);
     disp->setOrigin(x, y);
     window.setView(v2);
@@ -91,8 +90,8 @@ void WindowManager::refresh()
         item->draw();
     }
     Item *ptr;
-    for (int _x = x; _x < width; ++_x) {
-        for (int _y = y; _y < height; ++_y) {
+    for (int _x = x; _x < x + width; ++_x) {
+        for (int _y = y; _y < y + height; ++_y) {
             ptr = Core::core->rooms[_x][_y].item;
             if (ptr)
                 ptr->draw();

@@ -30,11 +30,13 @@ bool ItemMgr::setItemData(enum itemType itype, const std::string &filename, floa
 
     if (frequency > 0)
         freq.push_back(itype);
-    if (!ret)
+    if (!ret) {
         std::cerr << "Failed to load image 'textures/" << filename << "'.\n";
-    ret = itemData[itype].tex.loadFromFile("textures/debug.png");
-    if (!ret)
-        std::cerr << "Failed to load replacement image 'textures/debug.png'.\n";
+        ret = itemData[itype].tex.loadFromFile("textures/debug.png");
+        if (!ret)
+            std::cerr << "Failed to load replacement image 'textures/debug.png'.\n";
+        ret = false;
+    }
     return ret;
 }
 
@@ -70,6 +72,7 @@ Item *ItemMgr::create(enum itemType itm)
 void ItemMgr::setLoot()
 {
     auto &dyna = Core::core->getDynamicItemList();
+    dyna.reserve(16);
     while (dyna.size() < 16)
         dyna.push_back(std::make_shared<DynamicItem>(window));
     auto &rooms = Core::core->rooms;

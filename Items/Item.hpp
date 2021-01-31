@@ -23,8 +23,8 @@ class Item {
 public:
     Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount = 4, int fullTime = 60);
     virtual ~Item();
-    Item(const Item &cpy) = default;
-    Item &operator=(const Item &src) = default;
+    Item(const Item &cpy) = delete;
+    Item &operator=(const Item &src) = delete;
 
     virtual void setPosition(int x, int y);
     virtual bool drop(int x, int y);

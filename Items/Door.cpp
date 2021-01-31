@@ -6,7 +6,7 @@
 */
 #include "Door.hpp"
 
-Door::Door(sf::RenderWindow &window, sf::Texture &texture, int health) : Item(window, texture), maxHealth(health), health(health)
+Door::Door(sf::RenderWindow &window, sf::Texture &texture, int health) : Item(window, texture, 1), maxHealth(health), health(health)
 {}
 
 Door::~Door()

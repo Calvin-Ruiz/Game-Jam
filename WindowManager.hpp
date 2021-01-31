@@ -52,8 +52,8 @@ private:
     std::unique_ptr<sf::RenderStates> gstate;
     int x = 0;
     int y = 0;
-    int width = 0;
-    int height = 0;
+    int width = 4*4+1;
+    int height = 4*3+1;
 };
 
 #endif /* WINDOW_MANAGER_HPP_ */

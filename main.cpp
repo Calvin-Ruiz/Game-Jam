@@ -17,6 +17,8 @@
 
 #include "Room.hpp"
 
+#define COEF 10.f
+
 int main(/*int argc, char const *argv[]*/)
 {
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Amoeba Dungeon", sf::Style::Default);
@@ -24,11 +26,11 @@ int main(/*int argc, char const *argv[]*/)
     sf::Event event;
     StartMenu startMenu(window, event);
     ItemMgr imgr(window);
-    imgr.setItemData(ItemMgr::BLASTER, "blaster.png", 0.3, 24);
-    imgr.setItemData(ItemMgr::BAZOOKA, "bazooka.png", 0.1, 2);
-    imgr.setItemData(ItemMgr::DOOR, "door.png", 0.5, 32);
+    imgr.setItemData(ItemMgr::BLASTER, "blaster.png", COEF * 0.3, 24);
+    imgr.setItemData(ItemMgr::BAZOOKA, "bazooka.png", COEF * 0.1, 2);
+    imgr.setItemData(ItemMgr::DOOR, "door.png", COEF * 0.5, 32);
     imgr.setItemData(ItemMgr::KEY, "key.png", -1);
-    imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", 0.2);
+    imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", COEF * 0.2);
     imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 0.1f);
     imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 0.15f);
     imgr.setItemData(ItemMgr::EXIT, "exit.png", 0);

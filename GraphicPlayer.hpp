@@ -32,6 +32,12 @@ public:
 
     // define or redefine position
     void setPosition(int x, int y);
+    // return coordinates
+    void getCoords(int &x, int &y) {
+        x = (this->x + animate_x) * 256;
+        y = (this->y + animate_y) * 256;
+    }
+
     // inform left movement
     void left();
     // inform right movement

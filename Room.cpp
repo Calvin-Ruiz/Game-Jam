@@ -12,21 +12,21 @@
 
 void findRoom(int &x, int &y, room *myRoom, std::vector<std::vector<room>> &rooms)
 {
-    y = 0;
-    for (int xy = 0; xy < rooms.size(); xy++) {
-        x = 0;
-        for (int xx = 0; xx < rooms[xy].size(); xx++) {
+    x = 0;
+    for (int xx = 0; xx < rooms.size(); xx++) {
+        y = 0;
+        for (int xy = 0; xy < rooms[xx].size(); xy++) {
             if (&rooms[xx][xy] == myRoom) return;
-            x++;
+            y++;
         }
-        y++;
+        x++;
     }
 }
 
-bool canGoHere(int x, int y, room myRoom, std::vector<std::vector<room>> rooms)
+bool canGoHere(int x, int y, std::vector<std::vector<room>> rooms)
 {
-    if (y >= 0 && y < rooms.size())
-        if (x >= 0 && x < rooms[y].size())
+    if (x >= 0 && x < rooms.size())
+        if (y >= 0 && y < rooms[x].size())
             if (!rooms[x][y].visited) return true;
     return false;
 }
@@ -34,10 +34,10 @@ bool canGoHere(int x, int y, room myRoom, std::vector<std::vector<room>> rooms)
 int getLengthWay(int x, int y, room myRoom, std::vector<std::vector<room>> rooms)
 {
     int res = 0;
-    if (!myRoom.top && canGoHere(x, y - 1, myRoom, rooms)) res++;
-    if (!myRoom.bottom && canGoHere(x, y + 1, myRoom, rooms)) res++;
-    if (!myRoom.left && canGoHere(x - 1, y, myRoom, rooms)) res++;
-    if (!myRoom.right && canGoHere(x + 1, y, myRoom, rooms)) res++;
+    if (!myRoom.top && canGoHere(x - 1, y, rooms)) res++;
+    if (!myRoom.bottom && canGoHere(x + 1, y, rooms)) res++;
+    if (!myRoom.left && canGoHere(x, y - 1, rooms)) res++;
+    if (!myRoom.right && canGoHere(x, y + 1, rooms)) res++;
     return res;
 }
 
@@ -51,38 +51,37 @@ bool findPath(int &x, int &y, std::vector<std::vector<room>> &rooms, std::list<r
 
     int ran = rand.randInt(0, len - 1);
 
-
-    if (!myRoom->top && canGoHere(x, y - 1, *myRoom, rooms)) {
+    if (!myRoom->top && canGoHere(x - 1, y, rooms)) {
         if (ran == 0) {
             rooms[x][y].top = true;
-            y--;
+            x--;
             rooms[x][y].bottom = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->bottom && canGoHere(x, y + 1, (*myRoom), rooms)) {
+    } if (!myRoom->bottom && canGoHere(x + 1, y, rooms)) {
         if (ran == 0) {
             rooms[x][y].bottom = true;
-            y++;
+            x++;
             rooms[x][y].top = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->right && canGoHere(x + 1, y, (*myRoom), rooms)) {
+    } if (!myRoom->right && canGoHere(x, y + 1, rooms)) {
         if (ran == 0) {
             rooms[x][y].right = true;
-            x++;
+            y++;
             rooms[x][y].left = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
         }
         ran--;
-    } if (!myRoom->left && canGoHere(x - 1, y, (*myRoom), rooms))
+    } if (!myRoom->left && canGoHere(x, y - 1, rooms))
         if (ran == 0) {
             rooms[x][y].left = true;
-            x--;
+            y--;
             rooms[x][y].right = true;
             listRoom.push_front(&(rooms[x][y]));
             return true;
@@ -105,11 +104,15 @@ void showLaby(std::vector<std::vector<room>> rooms)
     for (std::vector<room> r : rooms) {
         x = 1;
         for (room room : r) {
-            laby[x][y] = ' ';
+            // std::cout << "y = " << y << " x = " << x << " " << room.left << std::endl;
+
+            laby[y][x] = ' ';
             if (room.top) laby[y - 1][x] = ' ';
             if (room.bottom) laby[y + 1][x] = ' ';
             if (room.left) laby[y][x - 1] = ' ';
             if (room.right) laby[y][x + 1] = ' ';
+            if (room.exit == EXIT) laby[y][x] = 'E';
+            if (room.exit == ENTER) laby[y][x] = 'O';
             x += 2;
         }
         y += 2;
@@ -117,6 +120,19 @@ void showLaby(std::vector<std::vector<room>> rooms)
 
     for (std::string r : laby)
         std::cout << r << std::endl;
+}
+
+void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit)
+{
+    x = 0;
+    for (int xx = 0; xx < rooms.size(); xx++) {
+        y = 0;
+        for (int xy = 0; xy < rooms[xx].size(); xy++) {
+            if (rooms[xx][xy].exit == exit) return;
+            y++;
+        }
+        x++;
+    }
 }
 
 void createLaby(int seed, int width, int height, std::vector<std::vector<room>> &rooms, std::vector<std::shared_ptr<Item>> &items)
@@ -137,6 +153,7 @@ void createLaby(int seed, int width, int height, std::vector<std::vector<room>> 
     /* Create list of Visited Room */
     std::list<room*> listRoom;
     listRoom.push_front(&rooms[0][0]);
+    listRoom.front()->visited = true;
     int x = 0;
     int y = 0;
     while (1) {
@@ -145,5 +162,11 @@ void createLaby(int seed, int width, int height, std::vector<std::vector<room>> 
         else listRoom.pop_front();
     }
 
-    // showLaby(rooms);
+    // rooms[rand.randInt(0, height - 1)][0].exit = Exit::ENTER;
+    // rooms[rand.randInt(0, height - 1)][width - 1].exit = Exit::EXIT;
+
+    rooms[0][0].exit = Exit::ENTER;
+    rooms[height - 1][width - 1].exit = Exit::EXIT;
+
+    showLaby(rooms);
 }

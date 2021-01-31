@@ -13,18 +13,25 @@
 
 class Item;
 
+enum Exit {
+    NONE,
+    EXIT,
+    ENTER,
+};
+
 struct room
 {
     bool hasCreeper;
     bool hasChanged;
     bool hasWallChanged = false;
     bool isBlocking; // Is it blocking for creeper
-    bool left;
-    bool right;
-    bool top;
-    bool bottom;
+    bool left = false;
+    bool right = false;
+    bool top = false;
+    bool bottom = false;
 
     bool visited = false; // Only for generation
+    Exit exit = NONE;
     Item *item;
 };
 

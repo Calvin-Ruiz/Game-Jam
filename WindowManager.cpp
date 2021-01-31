@@ -119,22 +119,34 @@ void WindowManager::update()
 
                 if (event.key.code == sf::Keyboard::Escape) {
                     Core::core->setPause(true);
-                }
-
-                else if (event.key.code == sf::Keyboard::Up) {
+                } else if (event.key.code == sf::Keyboard::Up) {
                     this->player->top();
-                }
-
-                else if (event.key.code == sf::Keyboard::Down) {
+                } else if (event.key.code == sf::Keyboard::Down) {
                     this->player->bottom();
-                }
-
-                else if (event.key.code == sf::Keyboard::Left) {
+                } else if (event.key.code == sf::Keyboard::Left) {
                     this->player->left();
-                }
-
-                else if (event.key.code == sf::Keyboard::Right) {
+                } else if (event.key.code == sf::Keyboard::Right) {
                     this->player->right();
+                } else if (event.key.code == sf::Keyboard::Num1) {
+                    this->player->useItem(0);
+                } else if (event.key.code == sf::Keyboard::Num2) {
+                    this->player->useItem(1);
+                } else if (event.key.code == sf::Keyboard::Num3) {
+                    this->player->useItem(2);
+                } else if (event.key.code == sf::Keyboard::Num4) {
+                    this->player->useItem(3);
+                } else if (event.key.code == sf::Keyboard::Num5) {
+                    this->player->useItem(4);
+                } else if (event.key.code == sf::Keyboard::Num6) {
+                    this->player->useItem(5);
+                } else if (event.key.code == sf::Keyboard::Num7) {
+                    this->player->useItem(6);
+                } else if (event.key.code == sf::Keyboard::Num8) {
+                    this->player->useItem(7);
+                } else if (event.key.code == sf::Keyboard::Num9) {
+                    this->player->useItem(8);
+                } else if (event.key.code == sf::Keyboard::Num0) {
+                    this->player->useItem(9);
                 }
 
                 break;

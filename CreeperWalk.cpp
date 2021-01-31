@@ -6,6 +6,7 @@
 */
 #include "CreeperWalk.hpp"
 #include "Door.hpp"
+#include <thread>
 
 CreeperWalk *CreeperWalk::instance = nullptr;
 
@@ -50,12 +51,11 @@ inline bool CreeperWalk::creeperify(int x, int y)
 
 void CreeperWalk::update()
 {
-    mtx.lock();
     if (spawnTime) {
         spawnTime--;
-        mtx.unlock();
         return;
     }
+    mtx.lock();
     newCreepers.clear();
     creeperify(spawnX, spawnY);
     for (position &value : creepers) {

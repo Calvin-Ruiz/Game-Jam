@@ -48,7 +48,7 @@ void WallDisplay::draw()
                 bc[y * 6 + 5].texCoords.x = bc[y * 6 + 2].texCoords.x = bc[y * 6 + 4].texCoords.x = 256 + bc[y * 6].texCoords.x;
                 bc[y * 6 + 5].texCoords.y = bc[y * 6 + 1].texCoords.y = bc[y * 6 + 3].texCoords.y = 256 + bc[y * 6].texCoords.y;
                 rooms[x][y].hasWallChanged = false;
-                b.update(bc.data() + y * 6, y, 6);
+                b.update(bc.data() + y * 6, 6, y * 6);
             }
         }
     }

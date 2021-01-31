@@ -17,7 +17,7 @@
 
 #include "Room.hpp"
 
-#define COEF 10.f
+#define COEF 1.f
 
 void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit);
 

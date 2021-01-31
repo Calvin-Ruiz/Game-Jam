@@ -41,12 +41,12 @@ protected:
     bool isOnLand = false;
     //! attached value in percent
     float value = 0;
+    const int fullTime;
+    const int phaseCount;
 private:
     sf::VertexArray buffer;
     float lastValue = 0;
     int time = 0;
-    int fullTime;
-    int phaseCount;
 };
 
 #endif /* ITEM_HPP_ */

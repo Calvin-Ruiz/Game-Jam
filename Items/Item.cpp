@@ -12,7 +12,7 @@
 #include "Room.hpp"
 
 Item::Item(sf::RenderWindow &window, sf::Texture &texture, int phaseCount, int fullTime) :
-    window(window), sprite(texture), buffer(sf::PrimitiveType::TriangleStrip, 4), fullTime(fullTime), phaseCount(phaseCount)
+    window(window), sprite(texture), fullTime(fullTime), phaseCount(phaseCount), buffer(sf::PrimitiveType::TriangleStrip, 4)
 {
     buffer[0].color = buffer[1].color = buffer[2].color = buffer[3].color = sf::Color::Green;
     rect = sprite.getTextureRect();

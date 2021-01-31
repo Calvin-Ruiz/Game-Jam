@@ -23,10 +23,11 @@ DynamicItem::~DynamicItem()
 void DynamicItem::redefine(sf::Texture &texture, int _x, int _y, float _vel_x, float _vel_y, enum actionType _action)
 {
     sprite.setTexture(texture, true);
-    auto tmp = sprite.getTextureRect();
+    rect = sprite.getTextureRect();
+    rect.width /= phaseCount;
     sprite.scale(0.5, 0.5);
-    _x -= tmp.height / 4;
-    _y -= tmp.height / 4;
+    _x -= rect.height / 4;
+    _y -= rect.height / 4;
     x = _x;
     y = _y;
     sprite.setPosition(x, y);
@@ -50,7 +51,7 @@ void DynamicItem::explode(int x1, int y1, int radius)
         for (int _x = x1; _x <= x2; _x++) {
             tmp->killCreeper(_x, y1);
         }
-        y2++;
+        y1++;
     }
     tmp->unlock();
 }

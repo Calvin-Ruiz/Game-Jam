@@ -12,7 +12,7 @@
 #include <vector>
 #include "Room.hpp"
 
-WindowManager::WindowManager(sf::RenderWindow &window) : window(window), buffer(sf::PrimitiveType::TriangleStrip, sf::VertexBuffer::Static)
+WindowManager::WindowManager(sf::RenderWindow &window) : window(window), buffer(sf::PrimitiveType::TriangleStrip, sf::VertexBuffer::Static), band(sf::PrimitiveType::TriangleStrip, sf::VertexBuffer::Static)
 {
     this->player = nullptr;
 }
@@ -57,6 +57,16 @@ void WindowManager::initialize()
     player->setPosition(Core::core->initX, Core::core->initY);
     CreeperDisplay::instance->setDimension(height, width);
     disp->setDimension(height, width);
+    {
+        float x1 = 256*3;
+        float y1 = 2560;
+        float x2 = x1 + 256 * 10;
+        float y2 = y1 + 256;
+        sf::Color c(255, 255, 255, 127);
+        sf::Vertex v2[4] = {{{x1, y1}, c}, {{x2, y1}, c}, {{x1, y2}, c}, {{x2, y2}, c}};
+        band.create(4);
+        band.update(v2);
+    }
 }
 
 void WindowManager::refresh()
@@ -95,12 +105,13 @@ void WindowManager::refresh()
                 ptr->draw();
         }
     }
-    player->update();
+    if (!player->update())
+        ready = false;
     player->get().render();
     disp->draw();
     v2.setCenter(128*4*4, 128*4*3);
     window.setView(v2);
-    // draw band (512, 2560) to (512 + 256 * 10, 2560 + 256)
+    window.draw(band);
     player->draw();
     if (!Core::core->paused())
         window.display();

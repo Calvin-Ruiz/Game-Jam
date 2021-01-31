@@ -69,6 +69,8 @@ Item *ItemMgr::create(enum itemType itm)
     return item.get();
 }
 
+void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit);
+
 void ItemMgr::setLoot()
 {
     auto &dyna = Core::core->getDynamicItemList();
@@ -81,6 +83,9 @@ void ItemMgr::setLoot()
     std::uniform_real_distribution<float> distr(0, 100);
     std::uniform_int_distribution<long> single(0, rooms.size() * rooms[0].size() - 1);
 
+    int x, y;
+    findExit(x, y, rooms, ::EXIT);
+    create(EXIT)->drop(x, y);
     int i = 0;
     for (auto &value : itemData) {
         if (value.frequency == -1.) {

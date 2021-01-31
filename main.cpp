@@ -33,9 +33,9 @@ int main(/*int argc, char const *argv[]*/)
     imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 0.15f);
     imgr.setItemData(ItemMgr::EXIT, "exit.png", 0);
 
-    int width = 20;
-    int height = 20;
     while (window.isOpen()) {
+        int width = startMenu.getLevel() * 10 + 20;
+        int height = startMenu.getLevel() * 10 + 20;
         // main menu
         startMenu.mainloop();
 

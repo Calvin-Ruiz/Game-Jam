@@ -22,6 +22,7 @@ class StartMenu {
         sf::Sprite getMenuStartBackground();
         sf::Sprite getMenuButtonPlay();
         sf::Sprite getMenuButtonExit();
+        int getLevel() {return level;}
 
     protected:
     private:

@@ -133,6 +133,7 @@ void WindowManager::onPause()
 {
 
     sf::Event event;
+    sf::Vector2i localPosition = sf::Mouse::getPosition(this->window);
 
     while (window.pollEvent(event)) {
 
@@ -154,6 +155,26 @@ void WindowManager::onPause()
                 break;
         }
 
+    }
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
+        localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 && 
+        localPosition.x >= this->menuButtonLeaveS.getPosition().x && 
+        localPosition.y <= this->menuButtonLeaveS.getPosition().y + 130 && 
+        localPosition.y >= this->menuButtonLeaveS.getPosition().y) {
+        exit(0);
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
+        localPosition.x <= this->menuButtonResumeS.getPosition().x + 180 && 
+        localPosition.x >= this->menuButtonResumeS.getPosition().x && 
+        localPosition.y <= this->menuButtonResumeS.getPosition().y + 130 && 
+        localPosition.y >= this->menuButtonResumeS.getPosition().y) {
+        Core::core->setPause(false);
+    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
+        localPosition.x <= this->menuButtonRetryS.getPosition().x + 180 && 
+        localPosition.x >= this->menuButtonRetryS.getPosition().x && 
+        localPosition.y <= this->menuButtonRetryS.getPosition().y + 130 && 
+        localPosition.y >= this->menuButtonRetryS.getPosition().y) {
+        std::cout << "clic retry | doit relancer le niveau" << std::endl;
     }
 
     this->window.clear(); // maybe ne sert a rien, maybe fais tout bug

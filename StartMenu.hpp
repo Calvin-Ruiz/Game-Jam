@@ -23,6 +23,7 @@ class StartMenu {
         sf::Sprite getMenuButtonPlay();
         sf::Sprite getMenuButtonExit();
         int getLevel() {return level;}
+        void setMaxLevel(int newMaxLevel) {maxLevel = newMaxLevel;}
 
     protected:
     private:
@@ -41,6 +42,7 @@ class StartMenu {
         sf::Text selectLvlText;
         sf::RectangleShape rectangle;
         int level;
+        int maxLevel = 1;
 };
 
 #endif /* !STARTMENU_HPP_ */

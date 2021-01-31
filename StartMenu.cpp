@@ -89,7 +89,7 @@ void StartMenu::selectLvlLoop()
                         localPosition.x >= this->triangle2.getPosition().x - 70 && 
                         localPosition.y <= this->triangle2.getPosition().y + 80 && 
                         localPosition.y >= this->triangle2.getPosition().y) {
-                        if (this->level < 10) // nombre max de lvl debloquée
+                        if (this->level < this->maxLevel) // nombre max de lvl debloquée
                             this->level = this->level + 1;
                     }
                 }

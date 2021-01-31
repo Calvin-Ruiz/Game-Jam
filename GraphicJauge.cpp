@@ -6,11 +6,11 @@
 */
 
 #include "GraphicJauge.hpp"
-#include "Player.hpp"
+#include "GraphicPlayer.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
-GraphicJauge::GraphicJauge(sf::RenderWindow &window, Player &player) : window(window), player(player), buffer(sf::PrimitiveType::TriangleStrip, 12)
+GraphicJauge::GraphicJauge(sf::RenderWindow &window, GraphicPlayer &player) : window(window), player(player), buffer(sf::PrimitiveType::TriangleStrip, 12)
 {
     buffer[0].color = sf::Color::White;
     buffer[1].color = sf::Color::White;
@@ -70,7 +70,7 @@ void GraphicJauge::onResize()
 
 void GraphicJauge::update()
 {
-    setValue(player->getValue());
+    setValue(player->getHealth());
 }
 
 void GraphicJauge::draw()

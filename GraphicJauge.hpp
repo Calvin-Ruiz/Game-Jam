@@ -8,13 +8,13 @@
 #ifndef GRAPHICJAUGE_HPP_
 #define GRAPHICJAUGE_HPP_
 
-#include "Player.hpp"
+#include "GraphicPlayer.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
 class GraphicJauge {
 public:
-    GraphicJauge(sf::RenderWindow &window, Player &player);
+    GraphicJauge(sf::RenderWindow &window, GraphicPlayer &player);
     virtual ~GraphicJauge();
     GraphicJauge(const GraphicJauge &cpy) = default;
     GraphicJauge &operator=(const GraphicJauge &src) = default;
@@ -27,7 +27,7 @@ private:
     int height = 0;
     sf::VertexArray buffer;
     sf::RenderWindow &window;
-    Player &player;
+    GraphicPlayer &player;
 };
 
 #endif

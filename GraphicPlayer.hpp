@@ -51,6 +51,7 @@ public:
     void bottom();
     // (from 0 to 1, 1 is 100% and 0 is 0%)
     void setHealth(float value);
+    float getHealth() { return health; }
     // set orientation
     void setDirection(orientation dir);
 private:

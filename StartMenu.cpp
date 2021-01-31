@@ -9,6 +9,9 @@
 
 StartMenu::StartMenu(sf::RenderWindow &window, sf::Event &event) : window(window), event(event)
 {
+    std::string MaxLvlInFile;
+    std::fstream MyFile("SaveFile/maxlevel.txt");
+
     if (!this->menuStartBackgroundT.loadFromFile("Sprite/splash.png", sf::IntRect(0, 0, 800, 600)))
         std::cerr << "menuStartBackground can't load from file" << std::endl;
     if (!this->menuButtonExitT.loadFromFile("Sprite/Exit_button.png"))
@@ -17,7 +20,11 @@ StartMenu::StartMenu(sf::RenderWindow &window, sf::Event &event) : window(window
         std::cerr << "menuButtonPlay can't load from file" << std::endl;
     if (!this->gameOverFont.loadFromFile("Sprite/game_over.ttf"))
         std::cerr << "gameOverFont can't load from file" << std::endl;
-    
+    while (std::getline(MyFile, MaxLvlInFile)) {
+        this->maxLevel = std::stoi(MaxLvlInFile);
+    }
+    // MyFile.close();
+
     this->menuButtonPlayS.setTexture(menuButtonPlayT);
     this->menuButtonExitS.setTexture(menuButtonExitT);
     this->menuStartBackgroundS.setTexture(menuStartBackgroundT);
@@ -64,9 +71,10 @@ void StartMenu::selectLvlLoop()
 
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::KeyPressed) {
+            if (event.type == sf::Event::Closed) {
+                destroy();
+                exit(0);
+            } if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     return mainloop();
                 }
@@ -156,6 +164,7 @@ void StartMenu::mainloop()
             localPosition.y <= this->menuButtonExitS.getPosition().y + 80 && 
             localPosition.y >= this->menuButtonExitS.getPosition().y) {
             this->menuButtonExitS.setTextureRect(sf::IntRect(320, 0, 160, 80));
+            destroy();
             exit(0);
         } else if (localPosition.x <= this->menuButtonExitS.getPosition().x + 160 && 
             localPosition.x >= this->menuButtonExitS.getPosition().x && 
@@ -168,16 +177,17 @@ void StartMenu::mainloop()
 
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::Resized) {
+            if (event.type == sf::Event::Closed) {
+                destroy();
+                exit(0);
+            } if (event.type == sf::Event::Resized) {
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
                 window.setView(sf::View(visibleArea));
                 this->menuStartBackgroundS.setScale((float)this->window.getSize().x / (float) this->menuStartBackgroundT.getSize().x,
                                                  (float)this->window.getSize().y / (float) this->menuStartBackgroundT.getSize().y);
-            }
-            if (event.type == sf::Event::KeyPressed) {
+            } if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
+                    destroy();
                     exit(0);
                 }
             }
@@ -204,4 +214,13 @@ sf::Sprite StartMenu::getMenuButtonPlay()
 sf::Sprite StartMenu::getMenuButtonExit()
 {
     return (this->menuButtonExitS);
+}
+
+void StartMenu::destroy()
+{
+    std::cout << "ALED" << std::endl;
+    std::fstream MyFile;
+    MyFile.open("SaveFile/maxlevel.txt", std::ios::out | std::ios::trunc);
+    MyFile << std::to_string(this->maxLevel);
+    MyFile.close();
 }

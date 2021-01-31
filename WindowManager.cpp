@@ -59,6 +59,8 @@ void WindowManager::initialize()
     buffer.update(v);
     gstate = std::make_unique<sf::RenderStates>(ground);
     player->setPosition(Core::core->initX, Core::core->initY);
+    CreeperDisplay::instance->setDimension(4*4+1, 4*3+1);
+    disp->setDimension(4*4+1, 4*3+1);
 }
 
 void WindowManager::refresh()
@@ -156,7 +158,7 @@ void WindowManager::onPause()
         }
 
     }
-
+    
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && 
         localPosition.x <= this->menuButtonLeaveS.getPosition().x + 180 && 
         localPosition.x >= this->menuButtonLeaveS.getPosition().x && 
@@ -177,7 +179,7 @@ void WindowManager::onPause()
         std::cout << "clic retry | doit relancer le niveau" << std::endl;
     }
 
-    this->window.clear(); // maybe ne sert a rien, maybe fais tout bug
+    // this->window.clear(); // maybe ne sert a rien, maybe fais tout bug
     this->window.draw(this->rectangle);
     this->window.draw(this->menuButtonLeaveS);
     this->window.draw(this->menuButtonResumeS);

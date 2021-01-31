@@ -34,10 +34,10 @@ int main(/*int argc, char const *argv[]*/)
     imgr.setItemData(ItemMgr::EXIT, "exit.png", 0);
 
     while (window.isOpen()) {
-        int width = startMenu.getLevel() * 10 + 20;
-        int height = startMenu.getLevel() * 10 + 20;
         // main menu
         startMenu.mainloop();
+        int width = startMenu.getLevel() * 10 + 20;
+        int height = startMenu.getLevel() * 10 + 20;
 
         if (!window.isOpen())
             break;

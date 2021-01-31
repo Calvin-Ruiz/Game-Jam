@@ -17,7 +17,7 @@
 
 #include "Room.hpp"
 
-#define COEF 1.f
+#define COEF 10.f
 
 void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit);
 
@@ -58,7 +58,7 @@ int main(/*int argc, char const *argv[]*/)
         auto cd = new CreeperDisplay(window, core.rooms);
         auto cw = new CreeperWalk(core.rooms);
         cw->reset(50, 15, x, y); // 10 seconds before creeper comes, then 3 seconds per step
-        core.startMainloop(30, cd);
+        //core.startMainloop(30, cd);
         core.startMainloop(5, cw);
         core.startMainloop(20, new GlobalActivity());
         core.startMainloop(60, new WindowManager(window));

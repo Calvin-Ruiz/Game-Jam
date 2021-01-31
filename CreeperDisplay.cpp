@@ -63,7 +63,7 @@ void CreeperDisplay::update()
                     = sf::Vector2f(0, 0);
                 }
                 rooms[x][y].hasChanged = false;
-                b.update(bc.data() + y * 6, y * 6, 6);
+                b.update(bc.data() + (y * 6), 6, y * 6);
             }
         }
     }
@@ -71,6 +71,7 @@ void CreeperDisplay::update()
 
 void CreeperDisplay::draw()
 {
+    update();
     for (int i = x; i < this->x + width; ++i) {
         window.draw(buffers[i], y * 6, height * 6, states[time / 5]);
     }

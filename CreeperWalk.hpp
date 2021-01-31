@@ -46,10 +46,10 @@ inline void CreeperWalk::actualizeCreeper(int x, int y)
     room &target = rooms[x][y];
 
     if (target.hasCreeper) {
-        if ((target.left && !rooms[x - 1][y].hasCreeper) ||
+        if (!((target.left && !rooms[x - 1][y].hasCreeper) ||
             (target.right && !rooms[x + 1][y].hasCreeper) ||
             (target.top && !rooms[x][y - 1].hasCreeper) ||
-            (target.bottom && !rooms[x][y + 1].hasCreeper))
+            (target.bottom && !rooms[x][y + 1].hasCreeper)))
             creepers.push_back({x, y, &target});
     }
 }

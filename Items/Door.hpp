@@ -18,6 +18,9 @@ public:
     Door &operator=(const Door &src) = default;
 
     bool damage();
+    //! return true when this item must be removed of inventory
+    virtual bool use(int x, int y) override;
+    virtual bool drop(int x, int y) override;
 private:
     int maxHealth;
     int health;

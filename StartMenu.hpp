@@ -33,6 +33,13 @@ class StartMenu {
         sf::Sprite menuButtonPlayS;
         sf::Texture menuButtonExitT;
         sf::Sprite menuButtonExitS;
+        sf::CircleShape triangle1;
+        sf::CircleShape triangle2;
+        sf::Font gameOverFont;
+        sf::Text numberLvlText;
+        sf::Text selectLvlText;
+        sf::RectangleShape rectangle;
+        int level;
 };
 
 #endif /* !STARTMENU_HPP_ */

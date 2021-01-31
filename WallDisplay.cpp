@@ -37,10 +37,10 @@ void WallDisplay::draw()
         auto &bc = bufferContent[x];
         for (int y = this->y; y < height; ++y) {
             if (rooms[x][y].hasWallChanged) {
-                bc[y * 6].texCoords.x = bc[y * 6 + 1].texCoords.x = bc[y * 6 + 3].texCoords.x = 0.25 * !rooms[x][y].left + 0.5 * !rooms[x][y].right;
-                bc[y * 6].texCoords.y = bc[y * 6 + 2].texCoords.y = bc[y * 6 + 4].texCoords.y = 0.25 * !rooms[x][y].top + 0.5 * !rooms[x][y].bottom;
-                bc[y * 6 + 5].texCoords.x = bc[y * 6 + 2].texCoords.x = bc[y * 6 + 4].texCoords.x = 0.25 + bc[y * 6].texCoords.x;
-                bc[y * 6 + 5].texCoords.y = bc[y * 6 + 1].texCoords.y = bc[y * 6 + 3].texCoords.y = 0.25 + bc[y * 6].texCoords.y;
+                bc[y * 6].texCoords.x = bc[y * 6 + 1].texCoords.x = bc[y * 6 + 3].texCoords.x = 256 * !rooms[x][y].left + 512 * !rooms[x][y].right;
+                bc[y * 6].texCoords.y = bc[y * 6 + 2].texCoords.y = bc[y * 6 + 4].texCoords.y = 256 * !rooms[x][y].top + 512 * !rooms[x][y].bottom;
+                bc[y * 6 + 5].texCoords.x = bc[y * 6 + 2].texCoords.x = bc[y * 6 + 4].texCoords.x = 256 + bc[y * 6].texCoords.x;
+                bc[y * 6 + 5].texCoords.y = bc[y * 6 + 1].texCoords.y = bc[y * 6 + 3].texCoords.y = 256 + bc[y * 6].texCoords.y;
                 rooms[x][y].hasWallChanged = false;
                 b.update(bc.data() + y * 6, y, 6);
             }

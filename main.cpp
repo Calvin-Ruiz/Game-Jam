@@ -42,6 +42,7 @@ int main(/*int argc, char const *argv[]*/)
         if (!window.isOpen())
             break;
         Core core;
+        core.setRoomSize(0, 0, 256, 256);
         int x = 5, y = 5; // must be replaced by the entry location
         core.initX = x;
         core.initY = y;

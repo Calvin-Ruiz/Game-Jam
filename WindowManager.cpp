@@ -54,7 +54,7 @@ void WindowManager::initialize()
     ground->setRepeated(true);
     float x = Core::core->getRoomWidth() * Core::core->rooms.size();
     float y = Core::core->getRoomHeight() * Core::core->rooms[0].size();
-    sf::Vertex v[4] = {{{0, 0}, {0, 0}}, {{0, y}, {0, (float) Core::core->rooms[0].size()}}, {{x, 0}, {(float) Core::core->rooms.size(), 0}}, {{x, y}, {(float) Core::core->rooms.size(), (float) Core::core->rooms[0].size()}}};
+    sf::Vertex v[4] = {{{0, 0}, {0, 0}}, {{0, y}, {0, y}}, {{x, 0}, {x, 0}}, {{x, y}, {x, y}}};
     buffer.create(4);
     buffer.update(v);
     gstate = std::make_unique<sf::RenderStates>(ground);
@@ -63,6 +63,9 @@ void WindowManager::initialize()
 
 void WindowManager::refresh()
 {
+    sf::View v = window.getView();
+    sf::View v2(sf::FloatRect(0, 0, 256*4*4, 4*256*3));
+    window.setView(v2);
     window.clear();
     window.draw(buffer, *gstate);
     CreeperDisplay::instance->draw();
@@ -80,6 +83,7 @@ void WindowManager::refresh()
     disp->draw();
     if (!Core::core->paused())
         window.display();
+    window.setView(v);
 }
 
 void WindowManager::update()

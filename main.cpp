@@ -31,7 +31,7 @@ int main(/*int argc, char const *argv[]*/)
     imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", 0.2);
     imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 0.1f);
     imgr.setItemData(ItemMgr::ROCKET, "rocket.png", 0, 0.15f);
-    imgr.setItemData(ItemMgr::ROCKET, "exit.png", 0);
+    imgr.setItemData(ItemMgr::EXIT, "exit.png", 0);
 
     int width = 20;
     int height = 20;

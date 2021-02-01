@@ -21,7 +21,7 @@ CreeperDisplay::CreeperDisplay(sf::RenderWindow &window, std::vector<std::vector
         buffers.emplace_back(sf::PrimitiveType::Triangles, sf::VertexBuffer::Dynamic);
         bufferContent[i].resize(rooms[0].size() * 6, sf::Vertex(sf::Vector2f(0, 0), sf::Color::White));
         auto &bc = bufferContent[i];
-        for (int j = 0; j < rooms[0].size(); j += 6) {
+        for (int j = 0; j < rooms[0].size() * 6; j += 6) {
             bc[j].texCoords.x = bc[j + 1].texCoords.x = bc[j + 3].texCoords.x = 0;
             bc[j].texCoords.y = bc[j + 2].texCoords.y = bc[j + 4].texCoords.y = 0;
             bc[j + 5].texCoords.x = bc[j + 2].texCoords.x = bc[j + 4].texCoords.x = 256;

@@ -17,7 +17,7 @@
 
 #include "Room.hpp"
 
-#define COEF 1.f
+#define COEF 2.f
 
 void findExit(int &x, int &y, std::vector<std::vector<room>> &rooms, Exit exit);
 
@@ -30,7 +30,7 @@ int main(/*int argc, char const *argv[]*/)
     ItemMgr imgr(window);
     imgr.setItemData(ItemMgr::BLASTER, "blaster.png", COEF * 0.3, 24);
     imgr.setItemData(ItemMgr::BAZOOKA, "bazooka.png", COEF * 0.1, 2);
-    imgr.setItemData(ItemMgr::DOOR, "door.png", COEF * 0.5, 32);
+    imgr.setItemData(ItemMgr::DOOR, "door.png", COEF * 0.4, 32);
     imgr.setItemData(ItemMgr::KEY, "key.png", -1);
     imgr.setItemData(ItemMgr::MEDIKIT, "medikit.png", COEF * 0.2);
     imgr.setItemData(ItemMgr::BULLET, "bullet.png", 0, 25);

@@ -78,8 +78,10 @@ void Player::useItem(int idx)
     } else {
         // collect item in the ground
         Item *item = pos->item;
-        if (item && item->take(idx))
+        if (item && item->take(idx)) {
+            pos->item = nullptr;
             inventory[idx] = item;
+        }
     }
 }
 

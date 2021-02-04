@@ -52,6 +52,7 @@ void CreeperDisplay::update()
         auto &bc = bufferContent[x];
         for (int y = this->y; y < this->y + height; ++y) {
             if (rooms[x][y].hasChanged) {
+                rooms[x][y].hasChanged = false;
                 if (rooms[x][y].hasCreeper) {
                     bc[y * 6].position.x = bc[y * 6 + 1].position.x = bc[y * 6 + 3].position.x = x * 256;
                     bc[y * 6].position.y = bc[y * 6 + 2].position.y = bc[y * 6 + 4].position.y = y * 256;
@@ -62,7 +63,6 @@ void CreeperDisplay::update()
                     = bc[y * 6 + 3].position = bc[y * 6 + 4].position = bc[y * 6 + 5].position
                     = sf::Vector2f(0, 0);
                 }
-                rooms[x][y].hasChanged = false;
                 b.update(bc.data() + (y * 6), 6, y * 6);
             }
         }
